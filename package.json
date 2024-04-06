@@ -12,7 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build:ts": "tsup",
-    "build": "yarn build:rust && yarn build:ts",
+    "build": "yarn build:release && yarn build:ts",
     "build:rust": "cargo-cp-artifact -nc index.node -- cargo build --workspace --message-format=json-render-diagnostics",
     "build:debug": "yarn build:rust && yarn move-native",
     "build:release": "yarn build:rust --release && yarn move-native",
