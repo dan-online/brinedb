@@ -19,6 +19,12 @@ jobs:
           node-version: 20
           cache: yarn
           registry-url: https://registry.yarnpkg.com/
+
+      - name: Select Rust Toolchain
+        run: rustup toolchain install stable --profile minimal
+
+      - uses: Swatinem/rust-cache@v2
+    
       - name: Install Dependencies
         run: yarn --immutable
       - name: Run ESLint
