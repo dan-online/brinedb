@@ -76,7 +76,7 @@ jobs:
       - name: Build native
         run: yarn release-native
       - name: Package the asset
-        run: npx node-pre-gyp package
+        run: yarn node-pre-gyp package
       - name: Upload to Github releases
         shell: bash
         run: gh release upload ${{ env.RELEASE_VERSION }} "$(find ./build -name *.tar.gz)" --clobber
