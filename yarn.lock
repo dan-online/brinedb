@@ -1640,7 +1640,6 @@ __metadata:
     "@vitest/coverage-istanbul": ^1.4.0
     "@vitest/coverage-v8": ^1.4.0
     cargo-cp-artifact: ^0.1.8
-    esbuild-native-node-modules-plugin: ^1.0.3
     tsup: ^8.0.1
     typescript: ^5.1.3
     vitest: ^1.4.0
@@ -1994,13 +1993,6 @@ __metadata:
   version: 2.0.3
   resolution: "err-code@npm:2.0.3"
   checksum: 8b7b1be20d2de12d2255c0bc2ca638b7af5171142693299416e6a9339bd7d88fc8d7707d913d78e0993176005405a236b066b45666b27b797252c771156ace54
-  languageName: node
-  linkType: hard
-
-"esbuild-native-node-modules-plugin@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "esbuild-native-node-modules-plugin@npm:1.0.3"
-  checksum: 9b66797e373264d3a51f31fa8fb6930e43db6c51ecb0f2d8db9b0b8667685093b96c4d7bcfa85d1d592ab970ce16ac93845101b2716b6ee02a0f578653cea5b1
   languageName: node
   linkType: hard
 
