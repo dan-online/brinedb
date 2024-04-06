@@ -1,0 +1,16 @@
+{
+    "name": "brine-benchmark",
+    "scripts": {
+        "build": "tsup",
+        "start": "rm data/*; node dist/index.js"
+    },
+    "dependencies": {
+        "@favware/colorette-spinner": "^1.0.1",
+        "@joshdb/core": "npm:^1.2.7",
+        "@joshdb/sqlite": "npm:^1.1.9",
+        "better-sqlite3": "latest"
+    },
+    "devDependencies": {
+        "tsup": "^8.0.2"
+    }
+}

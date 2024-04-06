@@ -1,0 +1,65 @@
+{
+  "name": "brinedb",
+  "version": "1.0.0",
+  "description": "SeaORM wrapper for NodeJS, providing basic key/value storage in sqlite/postgres/mysql",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "workspaces": [
+    "benchmark"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:ts": "tsup",
+    "build": "yarn build:rust && yarn build:ts",
+    "build:rust": "cargo-cp-artifact -nc index.node -- cargo build --workspace --message-format=json-render-diagnostics",
+    "build:debug": "yarn build:rust && yarn move-native",
+    "build:release": "yarn build:rust --release && yarn move-native",
+    "benchmark": "yarn build:release && BENCHMARK=true yarn build:ts && node dist/benchmark.js",
+    "release-native": "yarn build:release",
+    "move-native": "rm -rf native && mkdir native && mv ./index.node ./native/brinedb.node",
+    "lint": "biome check src/**/*.ts"
+  },
+  "binary": {
+    "module_name": "brinedb",
+    "module_path": "./native",
+    "host": "https://github.com/dan-online/brinedb/releases/download/",
+    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-{libc}.tar.gz",
+    "remote_path": "v{version}"
+  },
+  "author": "DanCodes <dan@dancodes.online>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dan-online/brinedb.git"
+  },
+  "keywords": [
+    "sqlite",
+    "postgres",
+    "mysql",
+    "seaorm",
+    "kv",
+    "database",
+    "key-value",
+    "storage"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "^1.6.4",
+    "@favware/colorette-spinner": "^1.0.1",
+    "@sapphire/ts-config": "^5.0.0",
+    "@swc/core": "^1.3.62",
+    "@types/node": "^20.12.4",
+    "@typescript-eslint/eslint-plugin": "^7.0.1",
+    "@vitest/coverage-v8": "^1.4.0",
+    "@vitest/coverage-istanbul": "^1.4.0",
+    "cargo-cp-artifact": "^0.1.8",
+    "tsup": "^8.0.1",
+    "typescript": "^5.1.3",
+    "vitest": "^1.4.0"
+  },
+  "dependencies": {
+    "@mapbox/node-pre-gyp": "^1.0.11"
+  },
+  "packageManager": "yarn@3.6.3"
+}

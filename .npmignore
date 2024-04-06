@@ -1,0 +1,23 @@
+# Black holes
+.yarn/
+node_modules
+**/node_modules
+
+# TS Code
+src/
+
+# Rust Code
+crates/
+
+# Config
+.vscode/
+.github/
+
+# Native files
+target
+index.node
+native
+
+# Misc
+**/.DS_Store
+npm-debug.log*

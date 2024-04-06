@@ -1,0 +1,14 @@
+[package]
+name = "brine-root"
+version = "1.0.0"
+license = "MIT"
+edition = "2018"
+
+# include workspace at crates/lib
+[workspace]
+members = ["crates/lib", "crates/migration", "crates/entity"]
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
