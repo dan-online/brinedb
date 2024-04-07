@@ -1,11 +1,11 @@
-import { describe, expect, test } from "vitest";
+import { afterAll, describe, expect, test } from "vitest";
 import { Brine, BrineDatabases } from "..";
 
 describe("Test suite", () => {
 	let brine: Brine;
 
 	test("can instantiate", async () => {
-		brine = new Brine(BrineDatabases.sqlite.memory);
+		brine = new Brine("mysql://root:root@localhost:3306/brine");
 	});
 
 	test("can initialize", async () => {
@@ -109,5 +109,15 @@ describe("Test suite", () => {
 		const value = await brine.get("hello");
 
 		expect(value).toBe(null);
+	});
+
+	test("can close", async () => {
+		await brine.close();
+
+		expect(brine.get("test")).rejects.toThrowError("Brine not initialized");
+	});
+
+	afterAll(async () => {
+		await brine.close();
 	});
 });

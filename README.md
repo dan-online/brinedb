@@ -2,7 +2,7 @@
 
 # BrineDB
 
-[SeaORM](https://www.sea-ql.org/SeaORM/) wrapper for NodeJS, providing basic key/value storage in SQLite/Postgres/MySQL
+[SeaORM](https://www.sea-ql.org/SeaORM/) wrapper for NodeJS, providing basic key/value storage in SQLite/Postgres/MySQL/MariaDB.
 
 ## Table of contents
 
@@ -48,6 +48,9 @@ const brinedb = new Brine('sqlite:/path/to/database.sqlite');
 
 // Postgres
 const brinedb = new Brine('postgres://user:pass@localhost:5432/dbname');
+
+// MariaDB
+const brinedb = new Brine('mariadb://user:pass@localhost:3306/dbname');
 
 // MySQL
 const brinedb = new Brine('mysql://user:pass@localhost:3306/dbname');

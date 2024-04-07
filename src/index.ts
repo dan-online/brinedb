@@ -227,6 +227,24 @@ class Brine<T = unknown> {
 		return value;
 	}
 
+	/**
+	 * Close the connection to the database
+	 *
+	 * @returns Promise<void>
+	 *
+	 * @example
+	 * ```ts
+	 * await brinedb.close();
+	 * ```
+	 */
+	public async close() {
+		if (!this.initialized) return;
+
+		await this.internals.close();
+
+		this.initialized = false;
+	}
+
 	private initCheck() {
 		if (!this.initialized) {
 			throw new Error("Brine not initialized");

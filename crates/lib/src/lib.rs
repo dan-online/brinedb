@@ -232,6 +232,27 @@ fn has(mut cx: FunctionContext) -> JsResult<JsPromise> {
     Ok(promise)
 }
 
+fn close(mut cx: FunctionContext) -> JsResult<JsPromise> {
+    let rt = runtime(&mut cx)?;
+    let channel = cx.channel();
+
+    let (deferred, promise) = cx.promise();
+
+    rt.spawn(async move {
+        unsafe {
+            let db = DATABASE.take();
+
+            if let Some(db) = db {
+                db.close().await.expect("Unable to close connection");
+            }
+        }
+
+        deferred.settle_with(&channel, move |mut cx| Ok(cx.undefined()));
+    });
+
+    Ok(promise)
+}
+
 #[neon::main]
 fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("migrate", migrate)?;
@@ -242,5 +263,6 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("delMany", del_many)?;
     cx.export_function("count", count)?;
     cx.export_function("has", has)?;
+    cx.export_function("close", close)?;
     Ok(())
 }

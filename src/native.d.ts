@@ -17,4 +17,5 @@ declare module "*.node" {
 	): Promise<undefined>;
 	export function count(connectionURI: string): Promise<number>;
 	export function has(connectionURI: string, key: string): Promise<boolean>;
+	export function close(): Promise<undefined>;
 }
