@@ -45,7 +45,7 @@ JSON.parse
 
 #### Defined in
 
-[index.ts:18](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L18)
+[index.ts:18](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L18)
 
 ___
 
@@ -77,4 +77,4 @@ JSON.stringify
 
 #### Defined in
 
-[index.ts:11](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L11)
+[index.ts:11](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L11)

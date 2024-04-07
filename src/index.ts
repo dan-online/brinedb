@@ -21,9 +21,6 @@ export interface BrineOptions<T> {
 /**
  * Brine is a simple key-value store that persists data using Rust SeaORM bindings
  *
- * @param connectionURI The connection URI to the database
- * @param options Options for custom serialization and deserialization
- *
  * @example
  * ```ts
  * import { Brine } from "brinedb";
@@ -44,6 +41,12 @@ class Brine<T = unknown> {
 	private deserialize: (value: string) => T | Promise<T> = JSON.parse;
 	private serialize: (value: T) => string | Promise<string> = JSON.stringify;
 
+	/**
+	 * Create a new Brine instance
+	 *
+	 * @param connectionURI The connection URI to the database
+	 * @param options Options for custom serialization and deserialization
+	 */
 	constructor(connectionURI: string, options?: BrineOptions<T>) {
 		this.connectionURI = connectionURI;
 
