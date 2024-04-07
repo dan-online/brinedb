@@ -16,13 +16,12 @@ jobs:
           ref: ${{ github.event.release.tag_name }}
       - name: Set release version
         run: python3 -c "import os; tag = os.environ['GITHUB_REF'].split('/')[-1]; f = open(os.environ['GITHUB_ENV'], 'a'); f.write('RELEASE_VERSION='+tag); f.close();"
-
-      - uses: actions/setup-node@v3
+        
+      - name: Setup Node
+        uses: josh-development/.github/setup-node@main
         with:
-          node-version: ${{ matrix.node_version }}
-          registry-url: 'https://registry.npmjs.org'
-      - name: Install modules
-        run: yarn --immutable
+          version: ${{ matrix.node_version }}
+          turbo: true
 
       - name: Build js
         run: yarn build:ts
