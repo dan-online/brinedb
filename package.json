@@ -19,7 +19,8 @@
     "benchmark": "yarn build:release && BENCHMARK=true yarn build:ts && node dist/benchmark.js",
     "release-native": "yarn build:release",
     "move-native": "rm -rf native && mkdir native && mv ./index.node ./native/brinedb.node",
-    "lint": "biome check src/**/*.ts"
+    "lint": "biome check src/**/*.ts",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs src/index.ts --excludeExternals --externalPattern '**/node_modules/**'"
   },
   "binary": {
     "module_name": "brinedb",
@@ -55,6 +56,8 @@
     "@vitest/coverage-v8": "^1.4.0",
     "cargo-cp-artifact": "^0.1.8",
     "tsup": "^8.0.1",
+    "typedoc": "^0.25.12",
+    "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.1.3",
     "vitest": "^1.4.0"
   },
