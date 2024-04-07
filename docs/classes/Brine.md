@@ -86,7 +86,7 @@ const value = await brine.get("key");
 
 #### Defined in
 
-[index.ts:47](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L47)
+[index.ts:47](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L47)
 
 ## Properties
 
@@ -96,7 +96,7 @@ const value = await brine.get("key");
 
 #### Defined in
 
-[index.ts:40](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L40)
+[index.ts:40](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L40)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[index.ts:44](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L44)
+[index.ts:44](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L44)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[index.ts:42](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L42)
+[index.ts:42](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L42)
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-[index.ts:45](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L45)
+[index.ts:45](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L45)
 
 ## Accessors
 
@@ -168,7 +168,7 @@ ___
 
 #### Defined in
 
-[index.ts:59](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L59)
+[index.ts:59](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L59)
 
 ## Methods
 
@@ -184,9 +184,15 @@ Clear all values from the database
 
 Promise<void>
 
+**`Example`**
+
+```ts
+await brinedb.clear();
+```
+
 #### Defined in
 
-[index.ts:117](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L117)
+[index.ts:133](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L133)
 
 ___
 
@@ -194,7 +200,7 @@ ___
 
 ▸ **count**(): `Promise`\<`number`\>
 
-Get all keys in the database
+Count all documents in the database
 
 #### Returns
 
@@ -202,9 +208,15 @@ Get all keys in the database
 
 Promise<number>
 
+**`Example`**
+
+```ts
+const count = await brinedb.count();
+```
+
 #### Defined in
 
-[index.ts:146](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L146)
+[index.ts:177](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L177)
 
 ___
 
@@ -226,9 +238,15 @@ Delete a key from the database
 
 Promise<void>
 
+**`Example`**
+
+```ts
+await brinedb.delete("key");
+```
+
 #### Defined in
 
-[index.ts:127](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L127)
+[index.ts:148](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L148)
 
 ___
 
@@ -250,9 +268,15 @@ Delete multiple keys from the database
 
 Promise<void>
 
+**`Example`**
+
+```ts
+await brinedb.deleteMany(["key1", "key2"]);
+```
+
 #### Defined in
 
-[index.ts:137](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L137)
+[index.ts:163](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L163)
 
 ___
 
@@ -275,9 +299,21 @@ Ensure a key exists in the database
 
 The value that was set or the existing value
 
+**`Example`**
+
+```ts
+const value = await brinedb.ensure("key", "value");
+
+value === "value"; // true
+
+const changed = await brinedb.ensure("key", "changed");
+
+changed === "value"; // true
+```
+
 #### Defined in
 
-[index.ts:159](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L159)
+[index.ts:201](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L201)
 
 ___
 
@@ -299,9 +335,15 @@ Get a value from the store
 
 The value or null if it doesn't exist
 
+**`Example`**
+
+```ts
+const value = await brinedb.get("key");
+```
+
 #### Defined in
 
-[index.ts:87](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L87)
+[index.ts:92](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L92)
 
 ___
 
@@ -323,9 +365,15 @@ Check if a key exists in the database
 
 Promise<boolean>
 
+**`Example`**
+
+```ts
+const exists = await brinedb.has("key");
+```
+
 #### Defined in
 
-[index.ts:175](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L175)
+[index.ts:221](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L221)
 
 ___
 
@@ -349,7 +397,7 @@ await brinedb.init();
 
 #### Defined in
 
-[index.ts:75](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L75)
+[index.ts:75](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L75)
 
 ___
 
@@ -363,7 +411,7 @@ ___
 
 #### Defined in
 
-[index.ts:181](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L181)
+[index.ts:227](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L227)
 
 ___
 
@@ -386,6 +434,13 @@ Set a value in the store
 
 The value that was set
 
+**`Example`**
+
+```ts
+await brinedb.set("key", { foo: "bar" });
+await brinedb.set("key", "value");
+```
+
 #### Defined in
 
-[index.ts:104](https://github.com/dan-online/brinedb/blob/ace401e/src/index.ts#L104)
+[index.ts:115](https://github.com/dan-online/brinedb/blob/2dfef7b/src/index.ts#L115)

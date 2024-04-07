@@ -83,6 +83,11 @@ class Brine<T = unknown> {
 	 *
 	 * @param key The key to get
 	 * @returns The value or null if it doesn't exist
+	 *
+	 * @example
+	 * ```ts
+	 * const value = await brinedb.get("key");
+	 * ```
 	 */
 	public async get(key: string): Promise<T | null> {
 		const result = await this.internals
@@ -100,6 +105,12 @@ class Brine<T = unknown> {
 	 * @param key The key to set
 	 * @param value The value to set
 	 * @returns The value that was set
+	 *
+	 * @example
+	 * ```ts
+	 * await brinedb.set("key", { foo: "bar" });
+	 * await brinedb.set("key", "value");
+	 * ```
 	 */
 	public async set(key: string, value: T): Promise<T> {
 		const serializedValue = await this.serialize(value);
@@ -113,6 +124,11 @@ class Brine<T = unknown> {
 	 * Clear all values from the database
 	 *
 	 * @returns Promise<void>
+	 *
+	 * @example
+	 * ```ts
+	 * await brinedb.clear();
+	 * ```
 	 */
 	public async clear() {
 		await this.internals.clear(this.connectionURI);
@@ -123,6 +139,11 @@ class Brine<T = unknown> {
 	 *
 	 * @param key The key to delete
 	 * @returns Promise<void>
+	 *
+	 * @example
+	 * ```ts
+	 * await brinedb.delete("key");
+	 * ```
 	 */
 	public async delete(key: string): Promise<void> {
 		await this.internals.del(this.connectionURI, key);
@@ -133,15 +154,25 @@ class Brine<T = unknown> {
 	 *
 	 * @param keys The keys to delete
 	 * @returns Promise<void>
+	 *
+	 * @example
+	 * ```ts
+	 * await brinedb.deleteMany(["key1", "key2"]);
+	 * ```
 	 */
 	public async deleteMany(keys: string[]): Promise<void> {
 		await this.internals.delMany(this.connectionURI, keys);
 	}
 
 	/**
-	 * Get all keys in the database
+	 * Count all documents in the database
 	 *
 	 * @returns Promise<number>
+	 *
+	 * @example
+	 * ```ts
+	 * const count = await brinedb.count();
+	 * ```
 	 */
 	public async count() {
 		const count = await this.internals.count(this.connectionURI);
@@ -155,6 +186,17 @@ class Brine<T = unknown> {
 	 * @param key The key to check
 	 * @param value The value to set if the key doesn't exist
 	 * @returns The value that was set or the existing value
+	 *
+	 * @example
+	 * ```ts
+	 * const value = await brinedb.ensure("key", "value");
+	 *
+	 * value === "value"; // true
+	 *
+	 * const changed = await brinedb.ensure("key", "changed");
+	 *
+	 * changed === "value"; // true
+	 * ```
 	 */
 	public async ensure(key: string, value: T): Promise<T> {
 		const existing = await this.get(key);
@@ -171,6 +213,10 @@ class Brine<T = unknown> {
 	 *
 	 * @param key The key to check
 	 * @returns Promise<boolean>
+	 * @example
+	 * ```ts
+	 * const exists = await brinedb.has("key");
+	 * ```
 	 */
 	public async has(key: string): Promise<boolean> {
 		const value = await this.internals.has(this.connectionURI, key);
