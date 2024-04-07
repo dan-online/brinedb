@@ -79,4 +79,4 @@ jobs:
         shell: bash
         run: gh release upload ${{ env.RELEASE_VERSION }} "$(find ./build -name *.tar.gz)" --clobber
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
