@@ -15,7 +15,6 @@
   - [Development](#development)
     - [Prerequisites](#prerequisites)
     - [Building the entire package](#building-the-entire-package)
-    - [Running benchmarks](#running-benchmarks)
   - [Contributing](#contributing)
   - [Built With](#built-with)
   - [Versioning](#versioning)
@@ -105,12 +104,6 @@ $ yarn build
 
 This task will create a distribution version of the project
 inside your local `dist/` folder and output a binary in `native/`
-
-### Running benchmarks
-
-```sh
-$ yarn benchmark
-```
 
 ## Contributing
 
