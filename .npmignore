@@ -21,3 +21,10 @@ native
 # Misc
 **/.DS_Store
 npm-debug.log*
+benchmark/
+Cargo.*
+biome.json
+tests/
+tsconfig.json
+tsup.config.ts
+vitest.config.ts

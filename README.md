@@ -52,6 +52,15 @@ const brinedb = new Brine('postgres://user:pass@localhost:5432/dbname');
 
 // MySQL
 const brinedb = new Brine('mysql://user:pass@localhost:3306/dbname');
+
+// Initialize the database (also runs migrations)
+await brinedb.init();
+
+// Set a value
+await brinedb.set('key', { hello: 'world' });
+
+// Get a value
+const value = await brinedb.get('key');
 ```
 
 ## Typescript
