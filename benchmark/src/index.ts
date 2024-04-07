@@ -1,150 +1,132 @@
-import { Brine } from "../../dist";
-import Josh from "@joshdb/core";
-// @ts-expect-error 7016
-import JoshSqlite from "@joshdb/sqlite";
+import { Brine } from "../../";
 import { Spinner } from "@favware/colorette-spinner";
 import { BrineDatabases } from "../../src";
+import { Bench } from "tinybench";
 
-const runs = 100;
-const databaseSize = 5;
+const randomData = (length: number) => {
+	const chars =
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+	let result = "";
 
-console.log(
-	`\nBrine Benchmark commencing, runs set at ${runs} and ${databaseSize} database size.\n`,
-);
-
-interface kv {
-	set: (key: string, value: string) => Promise<void>;
-	get: (key: string) => Promise<void>;
-	clear: () => Promise<void>;
-}
-
-const test = async (store: kv) => {
-	const start = performance.now();
-
-	const randomKey = Math.random().toString(36).substring(7);
-	const randomValue = Math.random().toString(36).substring(7);
-
-	await store.set(randomKey, randomValue);
-	console.log(await store.get(randomKey));
-
-	const end = performance.now();
-
-	return end - start;
-};
-
-const spinner = new Spinner("Benchmark");
-const benchmark = async (name: string, runner: kv) => {
-	spinner.start({
-		text: `Benchmarking (${name}): 0/${runs}`,
-	});
-
-	let total = 0;
-	let lastUpdate = Date.now();
-
-	await runner.clear();
-
-	for (let i = 0; i < runs; i++) {
-		total += await test(runner);
-		spinner.update({
-			text: `Benchmarking (${name}): ${i + 1}/${runs}`,
-		});
-
-		if (lastUpdate + 50 < Date.now()) {
-			lastUpdate = Date.now();
-			spinner.spin();
-		}
+	for (let i = 0; i < length; i++) {
+		result += chars.charAt(Math.floor(Math.random() * chars.length));
 	}
 
-	return {
-		[name]: {
-			"Average (ms)": (total / runs).toFixed(3),
-			"Operations (op/s)": Math.round(runs / (total / 1000)).toLocaleString(),
-			"Total (s)": (total / 1000).toFixed(2),
-		},
-	};
+	return result;
+};
+
+const benchme = async (name: string, db: Brine) => {
+	const spinner = new Spinner("Initializing database");
+	const bench = new Bench({ time: 1000, warmupTime: 500 });
+
+	spinner.start();
+
+	await db.init();
+
+	spinner.update({
+		text: "Setting up database",
+	});
+
+	await db.clear();
+
+	const setInitialManyData: [string, string][] = [];
+
+	for (let i = 0; i < 1_000_000; i++) {
+		setInitialManyData.push([`key-${i}`, randomData(100)]);
+
+		spinner.update({
+			text: `Setting up database (${i + 1}/1000000) (${(
+				(i / 1_000_000) *
+				100
+			).toFixed(2)}%)`,
+		});
+	}
+
+	spinner.update({
+		text: "Setting up database",
+	});
+
+	await db.setMany(setInitialManyData);
+
+	const setManyData: [string, string][] = Array.from(
+		{ length: 100 },
+		(_, i) => [`key-many-${i}`, randomData(100)],
+	);
+
+	bench
+		.add("get", async () => {
+			await db.get(`key-${Math.floor(Math.random() * 1000)}`);
+		})
+		.add("set", async () => {
+			await db.set(`key-${Math.floor(Math.random() * 1000)}`, randomData(100));
+		})
+		.add("count", async () => {
+			await db.count();
+		})
+		.add("setMany", async () => {
+			await db.setMany(setManyData);
+		});
+
+	spinner.update({
+		text: "Running warmup",
+	});
+
+	await bench.warmup();
+
+	spinner.update({
+		text: "Running benchmarks",
+	});
+
+	await bench.run();
+	await db.close();
+
+	spinner.stop();
+
+	// clear line
+	process.stdout.moveCursor(0, -1);
+	process.stdout.clearLine(1);
+
+	const table = bench.table();
+	const finalTable: Record<string, string | number>[] = [];
+
+	console.log(`😃 Results for: ${name}\n`); // Add Average Time (ms) column based on "Average Time (ns)" column
+
+	for (const row of table) {
+		if (!row) continue;
+		if (typeof row["Average Time (ns)"] !== "number") continue;
+
+		finalTable.push({
+			...row,
+			"Average Time (ms)": (row["Average Time (ns)"] / 1000000).toFixed(3),
+		});
+	}
+
+	console.table(finalTable);
 };
 
 (async () => {
-	const josh = new Josh({
-		name: "josh",
-		provider: JoshSqlite,
-	});
+	const login = {
+		user: "root",
+		password: "root",
+		database: "brinedb",
+	};
 
-	const joshResults = await benchmark("Josh (SQLite)", {
-		set: async (key, value) => {
-			await josh.set(key, value);
-		},
-		get: async (key) => {
-			await josh.get(key);
-		},
-		clear: async () => {
-			await josh.delete(josh.all);
-		},
-	});
-
-	const brine_postgres = new Brine<string>(
-		BrineDatabases.postgres.build({
-			host: "localhost",
-			port: 5432,
-			user: "root",
-			password: "root",
-			database: "brine",
+	const sqlite_memory = new Brine(BrineDatabases.sqlite.memory);
+	const sqlite_file = new Brine(BrineDatabases.sqlite.file("benchmark.sqlite"));
+	const postgres = new Brine(BrineDatabases.postgres.build(login));
+	const mysql = new Brine(BrineDatabases.mysql.build(login));
+	const mariadb = new Brine(
+		BrineDatabases.mysql.build({
+			...login,
+			port: 3307,
 		}),
 	);
 
-	await brine_postgres.init();
+	await benchme("SQLite (Memory)", sqlite_memory);
+	await benchme("SQLite (File)", sqlite_file);
+	await benchme("PostgreSQL", postgres);
+	await benchme("MySQL", mysql);
+	await benchme("MariaDB", mariadb);
 
-	const brineResults = await benchmark("Brine (Postgres)", {
-		set: async (key, value) => {
-			await brine_postgres.set(key, value);
-		},
-		get: async (key) => {
-			await brine_postgres.get(key);
-		},
-		clear: async () => {
-			await brine_postgres.clear();
-		},
-	});
-
-	const brine_sqlite = new Brine<string>(
-		BrineDatabases.sqlite.file("./data/brine.sqlite"),
-	);
-
-	await brine_sqlite.init();
-
-	const brineResultsSqlite = await benchmark("Brine (SQLite)", {
-		set: async (key, value) => {
-			await brine_sqlite.set(key, value);
-		},
-		get: async (key) => {
-			await brine_sqlite.get(key);
-		},
-		clear: async () => {
-			await brine_sqlite.clear();
-		},
-	});
-
-	const brine_memory = new Brine<string>(BrineDatabases.sqlite.memory);
-
-	await brine_memory.init();
-
-	const brineResultsMemory = await benchmark("Brine (Memory)", {
-		set: async (key, value) => {
-			await brine_memory.set(key, value);
-		},
-		get: async (key) => {
-			await brine_memory.get(key);
-		},
-		clear: async () => {
-			await brine_memory.clear();
-		},
-	});
-
-	spinner.success({ text: "Benchmarking complete!" });
-	console.table({
-		...joshResults,
-		...brineResults,
-		...brineResultsSqlite,
-		...brineResultsMemory,
-	});
-})();
+	console.log("✅ All  benchmarks complete");
+})().catch(console.error);

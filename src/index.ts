@@ -228,6 +228,23 @@ class Brine<T = unknown> {
 	}
 
 	/**
+	 * Set many keys in the database
+	 *
+	 * @param data An array of 2d arrays containing keys and values
+	 * @returns Promise<void>
+	 */
+	public async setMany(data: [string, T][]) {
+		const serializedData = await Promise.all(
+			data.map(async ([key, value]) => [key, await this.serialize(value)]),
+		);
+
+		await this.internals.setMany(
+			this.connectionURI,
+			serializedData as [string, string][],
+		);
+	}
+
+	/**
 	 * Close the connection to the database
 	 *
 	 * @returns Promise<void>

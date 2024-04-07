@@ -3,6 +3,7 @@ use brinedb_entity::doc::Column as DocumentColumn;
 use brinedb_entity::doc::Entity as Document;
 use migration::Migrator;
 use migration::MigratorTrait;
+use migration::OnConflict;
 use neon::prelude::*;
 use sea_orm::prelude::*;
 use sea_orm::Set;
@@ -58,12 +59,12 @@ fn get(mut cx: FunctionContext) -> JsResult<JsPromise> {
     rt.spawn(async move {
         let connection = connection(connection_uri).await.expect("Unable to connect");
 
-        let model = Document::find_by_id(&key)
+        let res = Document::find_by_id(&key)
             .one(connection)
             .await
             .expect("Unable to find key");
 
-        deferred.settle_with(&channel, move |mut cx| match model {
+        deferred.settle_with(&channel, move |mut cx| match res {
             Some(doc) => Ok(cx.string(doc.value)),
             None => cx.throw_error("Key not found"),
         });
@@ -85,15 +86,89 @@ fn set(mut cx: FunctionContext) -> JsResult<JsPromise> {
     rt.spawn(async move {
         let connection = connection(connection_uri).await.expect("Unable to connect");
 
+        // if it already exists, update it
         let model = ActiveDocumentModel {
             key: Set(key.clone()),
             value: Set(value.clone()),
         };
 
-        Document::insert(model)
+        let res = Document::insert(model)
+            .on_conflict(
+                OnConflict::column(DocumentColumn::Key)
+                    .update_column(DocumentColumn::Value)
+                    .to_owned(),
+            )
             .exec(connection)
             .await
-            .expect("Unable to insert key");
+            .map_err(|err| err.to_string());
+
+        deferred.settle_with(&channel, move |mut cx| match res {
+            Ok(_) => Ok(cx.undefined()),
+            Err(err) => cx.throw_error(err),
+        });
+    });
+
+    Ok(promise)
+}
+
+fn set_many(mut cx: FunctionContext) -> JsResult<JsPromise> {
+    let connection_uri = cx.argument::<JsString>(0)?.value(&mut cx);
+    let pairs = cx.argument::<JsArray>(1)?;
+
+    let rt = runtime(&mut cx)?;
+    let channel = cx.channel();
+
+    let (deferred, promise) = cx.promise();
+
+    let mut pairs_vec = vec![];
+
+    for i in 0..pairs.len(&mut cx) {
+        let pair = pairs
+            .get::<JsArray, _, u32>(&mut cx, i)
+            .expect("Invalid array entry");
+
+        let key = pair
+            .get::<JsString, _, u32>(&mut cx, 0)
+            .expect("Invalid array entry")
+            .value(&mut cx);
+
+        let value = pair
+            .get::<JsString, _, u32>(&mut cx, 1)
+            .expect("Invalid array entry")
+            .value(&mut cx);
+
+        pairs_vec.push((key, value));
+    }
+
+    rt.spawn(async move {
+        let connection = connection(connection_uri).await.expect("Unable to connect");
+
+        let models = pairs_vec
+            .iter()
+            .map(|(key, value)| ActiveDocumentModel {
+                key: Set(key.clone()),
+                value: Set(value.clone()),
+            })
+            .collect::<Vec<_>>();
+
+        for chunk in models.chunks(1000) {
+            let res = Document::insert_many(chunk.to_vec())
+                .on_conflict(
+                    OnConflict::column(DocumentColumn::Key)
+                        .update_column(DocumentColumn::Value)
+                        .to_owned(),
+                )
+                .exec(connection)
+                .await
+                .map_err(|err| err.to_string());
+
+            if let Err(err) = res {
+                deferred.settle_with(&channel, move |mut cx| {
+                    cx.throw_error::<String, Handle<'_, JsString>>(err)
+                });
+                return;
+            }
+        }
 
         deferred.settle_with(&channel, move |mut cx| Ok(cx.undefined()));
     });
@@ -112,12 +187,15 @@ fn clear(mut cx: FunctionContext) -> JsResult<JsPromise> {
     rt.spawn(async move {
         let connection = connection(connection_uri).await.expect("Unable to connect");
 
-        Document::delete_many()
+        let res = Document::delete_many()
             .exec(connection)
             .await
-            .expect("Unable to clear all keys");
+            .map_err(|err| err.to_string());
 
-        deferred.settle_with(&channel, move |mut cx| Ok(cx.undefined()));
+        deferred.settle_with(&channel, move |mut cx| match res {
+            Ok(_) => Ok(cx.undefined()),
+            Err(err) => cx.throw_error(err),
+        });
     });
 
     Ok(promise)
@@ -220,13 +298,16 @@ fn has(mut cx: FunctionContext) -> JsResult<JsPromise> {
     rt.spawn(async move {
         let connection = connection(connection_uri).await.expect("Unable to connect");
 
-        let has = Document::find()
+        let res = Document::find()
             .filter(DocumentColumn::Key.eq(key))
             .count(connection)
             .await
-            .expect("Unable to count keys");
+            .map_err(|err| err.to_string());
 
-        deferred.settle_with(&channel, move |mut cx| Ok(cx.boolean(has > 0)));
+        deferred.settle_with(&channel, move |mut cx| match res {
+            Ok(count) => Ok(cx.boolean(count > 0)),
+            Err(err) => cx.throw_error(err),
+        });
     });
 
     Ok(promise)
@@ -264,5 +345,6 @@ fn main(mut cx: ModuleContext) -> NeonResult<()> {
     cx.export_function("count", count)?;
     cx.export_function("has", has)?;
     cx.export_function("close", close)?;
+    cx.export_function("setMany", set_many)?;
     Ok(())
 }

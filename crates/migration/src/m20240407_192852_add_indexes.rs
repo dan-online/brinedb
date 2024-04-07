@@ -9,18 +9,19 @@ pub struct Migration;
 impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .create_table(
-                Table::create()
+            .create_index(
+                Index::create()
                     .table(Brine::Table)
-                    .if_not_exists()
-                    .col(ColumnDef::new(Brine::Key).string().not_null().primary_key())
-                    .col(ColumnDef::new(Brine::Value).string())
+                    .col(Brine::Key)
+                    .name("idx_key")
                     .to_owned(),
             )
             .await
     }
 
-    async fn down(&self, _manager: &SchemaManager) -> Result<(), DbErr> {
-        Ok(())
+    async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        manager
+            .drop_index(Index::drop().table(Brine::Table).name("idx_key").to_owned())
+            .await
     }
 }

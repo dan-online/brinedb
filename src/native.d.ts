@@ -18,4 +18,8 @@ declare module "*.node" {
 	export function count(connectionURI: string): Promise<number>;
 	export function has(connectionURI: string, key: string): Promise<boolean>;
 	export function close(): Promise<undefined>;
+	export function setMany(
+		connectionURI: string,
+		data: [string, string][],
+	): Promise<undefined>;
 }

@@ -34,6 +34,12 @@ describe("Test suite", () => {
 		});
 	});
 
+	test("can set overwrite a value", async () => {
+		const value = await brine.set("hello", "world");
+
+		expect(value).toBe("world");
+	});
+
 	test("can get a value", async () => {
 		const value = await brine.get("hello");
 
@@ -109,6 +115,24 @@ describe("Test suite", () => {
 		const value = await brine.get("hello");
 
 		expect(value).toBe(null);
+	});
+
+	test("can set many", async () => {
+		const data: [string, string][] = [
+			["key1", "value1"],
+			["key2", "value2"],
+			["key3", "value3"],
+		];
+
+		await brine.setMany(data);
+
+		const value1 = await brine.get("key1");
+		const value2 = await brine.get("key2");
+		const value3 = await brine.get("key3");
+
+		expect(value1).toBe("value1");
+		expect(value2).toBe("value2");
+		expect(value3).toBe("value3");
 	});
 
 	test("can close", async () => {
