@@ -5,7 +5,7 @@ describe("Test suite", () => {
 	let brine: Brine;
 
 	test("can instantiate", async () => {
-		brine = new Brine("mysql://root:root@localhost:3306/brine");
+		brine = new Brine(BrineDatabases.sqlite.memory);
 	});
 
 	test("can initialize", async () => {

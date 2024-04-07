@@ -43,6 +43,7 @@ const value = await brine.get("key");
 ### Methods
 
 - [clear](Brine.md#clear)
+- [close](Brine.md#close)
 - [count](Brine.md#count)
 - [delete](Brine.md#delete)
 - [deleteMany](Brine.md#deletemany)
@@ -80,7 +81,7 @@ Create a new Brine instance
 
 #### Defined in
 
-[index.ts:50](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L50)
+[index.ts:50](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L50)
 
 ## Properties
 
@@ -90,7 +91,7 @@ Create a new Brine instance
 
 #### Defined in
 
-[index.ts:37](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L37)
+[index.ts:37](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L37)
 
 ___
 
@@ -114,7 +115,7 @@ ___
 
 #### Defined in
 
-[index.ts:41](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L41)
+[index.ts:41](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L41)
 
 ___
 
@@ -124,7 +125,7 @@ ___
 
 #### Defined in
 
-[index.ts:39](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L39)
+[index.ts:39](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L39)
 
 ___
 
@@ -148,7 +149,7 @@ ___
 
 #### Defined in
 
-[index.ts:42](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L42)
+[index.ts:42](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L42)
 
 ## Accessors
 
@@ -162,7 +163,7 @@ ___
 
 #### Defined in
 
-[index.ts:62](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L62)
+[index.ts:62](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L62)
 
 ## Methods
 
@@ -186,7 +187,31 @@ await brinedb.clear();
 
 #### Defined in
 
-[index.ts:136](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L136)
+[index.ts:136](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L136)
+
+___
+
+### close
+
+▸ **close**(): `Promise`\<`void`\>
+
+Close the connection to the database
+
+#### Returns
+
+`Promise`\<`void`\>
+
+Promise<void>
+
+**`Example`**
+
+```ts
+await brinedb.close();
+```
+
+#### Defined in
+
+[index.ts:240](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L240)
 
 ___
 
@@ -210,7 +235,7 @@ const count = await brinedb.count();
 
 #### Defined in
 
-[index.ts:180](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L180)
+[index.ts:180](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L180)
 
 ___
 
@@ -240,7 +265,7 @@ await brinedb.delete("key");
 
 #### Defined in
 
-[index.ts:151](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L151)
+[index.ts:151](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L151)
 
 ___
 
@@ -270,7 +295,7 @@ await brinedb.deleteMany(["key1", "key2"]);
 
 #### Defined in
 
-[index.ts:166](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L166)
+[index.ts:166](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L166)
 
 ___
 
@@ -307,7 +332,7 @@ changed === "value"; // true
 
 #### Defined in
 
-[index.ts:204](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L204)
+[index.ts:204](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L204)
 
 ___
 
@@ -337,7 +362,7 @@ const value = await brinedb.get("key");
 
 #### Defined in
 
-[index.ts:95](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L95)
+[index.ts:95](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L95)
 
 ___
 
@@ -367,7 +392,7 @@ const exists = await brinedb.has("key");
 
 #### Defined in
 
-[index.ts:224](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L224)
+[index.ts:224](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L224)
 
 ___
 
@@ -391,7 +416,7 @@ await brinedb.init();
 
 #### Defined in
 
-[index.ts:78](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L78)
+[index.ts:78](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L78)
 
 ___
 
@@ -405,7 +430,7 @@ ___
 
 #### Defined in
 
-[index.ts:230](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L230)
+[index.ts:248](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L248)
 
 ___
 
@@ -437,4 +462,4 @@ await brinedb.set("key", "value");
 
 #### Defined in
 
-[index.ts:118](https://github.com/dan-online/brinedb/blob/1f98f0b/src/index.ts#L118)
+[index.ts:118](https://github.com/dan-online/brinedb/blob/ab25ca8/src/index.ts#L118)

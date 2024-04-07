@@ -46,4 +46,4 @@ Renames and re-exports [Brine](classes/Brine.md)
 
 #### Defined in
 
-[utils.ts:1](https://github.com/dan-online/brinedb/blob/1f98f0b/src/utils.ts#L1)
+[utils.ts:1](https://github.com/dan-online/brinedb/blob/ab25ca8/src/utils.ts#L1)
