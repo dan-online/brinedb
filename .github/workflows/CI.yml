@@ -210,6 +210,7 @@ jobs:
           git config --global user.name "DanCodes"
           git add .
           git commit -m "feat: release $npm_package_version [skip ci]"
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

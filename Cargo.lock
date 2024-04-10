@@ -456,7 +456,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "brinedb"
+name = "brine-db"
 version = "0.0.0"
 dependencies = [
  "brinedb-entity",

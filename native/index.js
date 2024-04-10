@@ -37,7 +37,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.android-arm64.node')
           } else {
-            nativeBinding = require('@brinedb/brine-android-arm64')
+            nativeBinding = require('@brine-db/brine-android-arm64')
           }
         } catch (e) {
           loadError = e
@@ -49,7 +49,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.android-arm-eabi.node')
           } else {
-            nativeBinding = require('@brinedb/brine-android-arm-eabi')
+            nativeBinding = require('@brine-db/brine-android-arm-eabi')
           }
         } catch (e) {
           loadError = e
@@ -69,7 +69,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.win32-x64-msvc.node')
           } else {
-            nativeBinding = require('@brinedb/brine-win32-x64-msvc')
+            nativeBinding = require('@brine-db/brine-win32-x64-msvc')
           }
         } catch (e) {
           loadError = e
@@ -83,7 +83,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.win32-ia32-msvc.node')
           } else {
-            nativeBinding = require('@brinedb/brine-win32-ia32-msvc')
+            nativeBinding = require('@brine-db/brine-win32-ia32-msvc')
           }
         } catch (e) {
           loadError = e
@@ -97,7 +97,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.win32-arm64-msvc.node')
           } else {
-            nativeBinding = require('@brinedb/brine-win32-arm64-msvc')
+            nativeBinding = require('@brine-db/brine-win32-arm64-msvc')
           }
         } catch (e) {
           loadError = e
@@ -113,7 +113,7 @@ switch (platform) {
       if (localFileExisted) {
         nativeBinding = require('./brine.darwin-universal.node')
       } else {
-        nativeBinding = require('@brinedb/brine-darwin-universal')
+        nativeBinding = require('@brine-db/brine-darwin-universal')
       }
       break
     } catch {}
@@ -124,7 +124,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.darwin-x64.node')
           } else {
-            nativeBinding = require('@brinedb/brine-darwin-x64')
+            nativeBinding = require('@brine-db/brine-darwin-x64')
           }
         } catch (e) {
           loadError = e
@@ -138,7 +138,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.darwin-arm64.node')
           } else {
-            nativeBinding = require('@brinedb/brine-darwin-arm64')
+            nativeBinding = require('@brine-db/brine-darwin-arm64')
           }
         } catch (e) {
           loadError = e
@@ -157,7 +157,7 @@ switch (platform) {
       if (localFileExisted) {
         nativeBinding = require('./brine.freebsd-x64.node')
       } else {
-        nativeBinding = require('@brinedb/brine-freebsd-x64')
+        nativeBinding = require('@brine-db/brine-freebsd-x64')
       }
     } catch (e) {
       loadError = e
@@ -174,7 +174,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = require('./brine.linux-x64-musl.node')
             } else {
-              nativeBinding = require('@brinedb/brine-linux-x64-musl')
+              nativeBinding = require('@brine-db/brine-linux-x64-musl')
             }
           } catch (e) {
             loadError = e
@@ -187,7 +187,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = require('./brine.linux-x64-gnu.node')
             } else {
-              nativeBinding = require('@brinedb/brine-linux-x64-gnu')
+              nativeBinding = require('@brine-db/brine-linux-x64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -203,7 +203,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = require('./brine.linux-arm64-musl.node')
             } else {
-              nativeBinding = require('@brinedb/brine-linux-arm64-musl')
+              nativeBinding = require('@brine-db/brine-linux-arm64-musl')
             }
           } catch (e) {
             loadError = e
@@ -216,7 +216,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = require('./brine.linux-arm64-gnu.node')
             } else {
-              nativeBinding = require('@brinedb/brine-linux-arm64-gnu')
+              nativeBinding = require('@brine-db/brine-linux-arm64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -231,7 +231,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.linux-arm-gnueabihf.node')
           } else {
-            nativeBinding = require('@brinedb/brine-linux-arm-gnueabihf')
+            nativeBinding = require('@brine-db/brine-linux-arm-gnueabihf')
           }
         } catch (e) {
           loadError = e
@@ -246,7 +246,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = require('./brine.linux-riscv64-musl.node')
             } else {
-              nativeBinding = require('@brinedb/brine-linux-riscv64-musl')
+              nativeBinding = require('@brine-db/brine-linux-riscv64-musl')
             }
           } catch (e) {
             loadError = e
@@ -259,7 +259,7 @@ switch (platform) {
             if (localFileExisted) {
               nativeBinding = require('./brine.linux-riscv64-gnu.node')
             } else {
-              nativeBinding = require('@brinedb/brine-linux-riscv64-gnu')
+              nativeBinding = require('@brine-db/brine-linux-riscv64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -274,7 +274,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./brine.linux-s390x-gnu.node')
           } else {
-            nativeBinding = require('@brinedb/brine-linux-s390x-gnu')
+            nativeBinding = require('@brine-db/brine-linux-s390x-gnu')
           }
         } catch (e) {
           loadError = e
