@@ -17,7 +17,7 @@ napi = { version = "2.16.1", default-features = false, features = [
     "tokio_rt",
 ] }
 # https://github.com/sfackler/rust-openssl/issues/763#issuecomment-1150213102
-openssl = { version = "0.10.64", features = ["vendored"] }
+# openssl = { version = "0.10.64", features = ["vendored"] }
 # https://github.com/launchbadge/sqlx/issues/3189
 # https://github.com/launchbadge/sqlx/pull/3190
 time = "=0.3.34"

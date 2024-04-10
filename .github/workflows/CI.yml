@@ -34,7 +34,9 @@ jobs:
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            build: yarn build
+            build: |
+              sed -i 's/# openssl = { version = "0.10.64", features = \["vendored"\] }/openssl = { version = "0.10.64", features = \["vendored"\] }/' Cargo.toml
+              yarn build
     name: stable - ${{ matrix.settings.target }} - node@20
     runs-on: ${{ matrix.settings.host }}
     steps:
