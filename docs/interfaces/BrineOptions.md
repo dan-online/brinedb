@@ -1,4 +1,4 @@
-[@brinedb/brine](../README.md) / [Exports](../modules.md) / BrineOptions
+[@brine-db/brine](../README.md) / [Exports](../modules.md) / BrineOptions
 
 # Interface: BrineOptions\<T\>
 
@@ -45,7 +45,7 @@ JSON.parse
 
 #### Defined in
 
-[index.ts:18](https://github.com/dan-online/brinedb/blob/6c3396da21325bef297b5532fc2d6f594f1ff6ce/src/index.ts#L18)
+[index.ts:18](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L18)
 
 ___
 
@@ -77,4 +77,4 @@ JSON.stringify
 
 #### Defined in
 
-[index.ts:11](https://github.com/dan-online/brinedb/blob/6c3396da21325bef297b5532fc2d6f594f1ff6ce/src/index.ts#L11)
+[index.ts:11](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L11)

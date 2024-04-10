@@ -1,5 +1,3 @@
-@brine-db/brine / [Exports](modules.md)
-
 ![npm version](https://img.shields.io/npm/v/brinedb)
 
 # BrineDB

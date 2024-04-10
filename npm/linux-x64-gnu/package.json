@@ -1,5 +1,5 @@
 {
-  "name": "@brinedb/brine-linux-x64-gnu",
+  "name": "@brine-db/brine-linux-x64-gnu",
   "version": "1.0.2",
   "os": [
     "linux"
