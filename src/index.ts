@@ -1,4 +1,4 @@
-import bindings from "../native/brinedb.node";
+import { BrineDb } from "../native";
 
 export interface BrineOptions<T> {
 	/**
@@ -34,9 +34,7 @@ export interface BrineOptions<T> {
  * ```
  */
 class Brine<T = unknown> {
-	private readonly connectionURI: string;
-
-	private initialized = false;
+	private db: BrineDb;
 
 	private deserialize: (value: string) => T | Promise<T> = JSON.parse;
 	private serialize: (value: T) => string | Promise<string> = JSON.stringify;
@@ -48,7 +46,7 @@ class Brine<T = unknown> {
 	 * @param options Options for custom serialization and deserialization
 	 */
 	constructor(connectionURI: string, options?: BrineOptions<T>) {
-		this.connectionURI = connectionURI;
+		this.db = new BrineDb(connectionURI);
 
 		if (options?.serialize) {
 			this.serialize = options.serialize;
@@ -57,12 +55,6 @@ class Brine<T = unknown> {
 		if (options?.deserialize) {
 			this.deserialize = options.deserialize;
 		}
-	}
-
-	private get internals() {
-		this.initCheck();
-
-		return bindings;
 	}
 
 	/**
@@ -76,9 +68,8 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async init() {
-		await bindings.migrate(this.connectionURI);
-
-		this.initialized = true;
+		await this.db.connect();
+		await this.db.migrate();
 	}
 
 	/**
@@ -93,9 +84,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async get(key: string): Promise<T | null> {
-		const result = await this.internals
-			.get(this.connectionURI, key)
-			.catch(() => null);
+		const result = await this.db.get(key);
 
 		const parsed: T | null = result ? await this.deserialize(result) : null;
 
@@ -118,7 +107,7 @@ class Brine<T = unknown> {
 	public async set(key: string, value: T): Promise<T> {
 		const serializedValue = await this.serialize(value);
 
-		await this.internals.set(this.connectionURI, key, serializedValue);
+		await this.db.set(key, serializedValue);
 
 		return value;
 	}
@@ -134,7 +123,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async clear() {
-		await this.internals.clear(this.connectionURI);
+		await this.db.clear();
 	}
 
 	/**
@@ -149,7 +138,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async delete(key: string): Promise<void> {
-		await this.internals.del(this.connectionURI, key);
+		await this.db.delete(key);
 	}
 
 	/**
@@ -164,7 +153,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async deleteMany(keys: string[]): Promise<void> {
-		await this.internals.delMany(this.connectionURI, keys);
+		await this.db.deleteMany(keys);
 	}
 
 	/**
@@ -178,9 +167,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async count() {
-		const count = await this.internals.count(this.connectionURI);
-
-		return count;
+		return this.db.count();
 	}
 
 	/**
@@ -222,9 +209,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async has(key: string): Promise<boolean> {
-		const value = await this.internals.has(this.connectionURI, key);
-
-		return value;
+		return this.db.has(key);
 	}
 
 	/**
@@ -234,14 +219,11 @@ class Brine<T = unknown> {
 	 * @returns Promise<void>
 	 */
 	public async setMany(data: [string, T][]) {
-		const serializedData = await Promise.all(
+		const serializedData = (await Promise.all(
 			data.map(async ([key, value]) => [key, await this.serialize(value)]),
-		);
+		)) as [string, string][];
 
-		await this.internals.setMany(
-			this.connectionURI,
-			serializedData as [string, string][],
-		);
+		await this.db.setMany(serializedData);
 	}
 
 	/**
@@ -255,17 +237,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async close() {
-		if (!this.initialized) return;
-
-		await this.internals.close();
-
-		this.initialized = false;
-	}
-
-	private initCheck() {
-		if (!this.initialized) {
-			throw new Error("Brine not initialized");
-		}
+		await this.db.close();
 	}
 }
 

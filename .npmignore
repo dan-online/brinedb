@@ -1,30 +1,13 @@
-# Black holes
-.yarn/
-node_modules
-**/node_modules
-
-# TS Code
-src/
-
-# Rust Code
-crates/
-
-# Config
-.vscode/
-.github/
-
-# Native files
 target
-index.node
-native
-
-# Misc
-**/.DS_Store
-npm-debug.log*
-benchmark/
-Cargo.*
-biome.json
-tests/
-tsconfig.json
-tsup.config.ts
-vitest.config.ts
+Cargo.lock
+.cargo
+.github
+npm
+.eslintrc
+.prettierignore
+rustfmt.toml
+yarn.lock
+*.node
+.yarn
+tests
+benchmark
