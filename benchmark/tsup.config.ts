@@ -5,6 +5,4 @@ export default defineConfig({
 	clean: true,
 	entryPoints: ["src/index.ts"],
 	format: ["cjs"],
-	// regex ends in .node
-	external: [/\.node$/],
 });

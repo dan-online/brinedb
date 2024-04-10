@@ -36,8 +36,9 @@ export interface BrineOptions<T> {
 class Brine<T = unknown> {
 	private db: BrineDb;
 
-	private deserialize: (value: string) => T | Promise<T> = JSON.parse;
-	private serialize: (value: T) => string | Promise<string> = JSON.stringify;
+	private internalDeserialize: (value: string) => T | Promise<T> = JSON.parse;
+	private internalSerialize: (value: T) => string | Promise<string> =
+		JSON.stringify;
 
 	/**
 	 * Create a new Brine instance
@@ -49,11 +50,11 @@ class Brine<T = unknown> {
 		this.db = new BrineDb(connectionURI);
 
 		if (options?.serialize) {
-			this.serialize = options.serialize;
+			this.internalSerialize = options.serialize;
 		}
 
 		if (options?.deserialize) {
-			this.deserialize = options.deserialize;
+			this.internalDeserialize = options.deserialize;
 		}
 	}
 
@@ -238,6 +239,14 @@ class Brine<T = unknown> {
 	 */
 	public async close() {
 		await this.db.close();
+	}
+
+	private async serialize(value: T): Promise<string> {
+		return this.internalSerialize(value);
+	}
+
+	private async deserialize(value: string): Promise<T> {
+		return this.internalDeserialize(value);
 	}
 }
 

@@ -11,6 +11,7 @@
         "tinybench": "^2.6.0"
     },
     "devDependencies": {
+        "@types/node": "^20.12.7",
         "tsup": "^8.0.2"
     }
 }

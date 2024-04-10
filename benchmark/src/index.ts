@@ -1,6 +1,5 @@
-import { Brine } from "../../dist";
+import { Brine, BrineDatabases } from "../../dist";
 import { Spinner } from "@favware/colorette-spinner";
-import { BrineDatabases } from "../../src";
 import { Bench } from "tinybench";
 
 const randomData = (length: number) => {
