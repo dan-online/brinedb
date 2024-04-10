@@ -1,7 +1,7 @@
 name: CI
 env:
   DEBUG: napi:*
-  APP_NAME: brine
+  APP_NAME: brinedb
   MACOSX_DEPLOYMENT_TARGET: '10.13'
 permissions:
   contents: write
@@ -191,6 +191,8 @@ jobs:
       - name: List packages
         run: ls -R ./npm
         shell: bash
+      - name: Build TypeScript
+        run: yarn build:ts
       - name: Publish
         run: |
           export npm_package_version=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
