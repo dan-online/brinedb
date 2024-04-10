@@ -34,7 +34,14 @@ jobs:
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            build: yarn build --target x86_64-unknown-linux-gnu
+            build: |-
+              set -e;
+              apt update;
+              sudo apt-get install -y pkg-config libssl-dev perl; # REF: https://github.com/napi-rs/napi-rs/issues/1359
+              export OPENSSL_LIB_DIR="/usr/lib/x86_64-linux-gnu";
+              export OPENSSL_INCLUDE="/usr/include/openssl";
+              export CXXFLAGS="-stdlib=libc++ -L/usr/lib/llvm-18/lib -static"; # REF: https://github.com/napi-rs/napi-rs/issues/1985
+              yarn build --target x86_64-unknown-linux-gnu;
     name: stable - ${{ matrix.settings.target }} - node@20
     runs-on: ${{ matrix.settings.host }}
     steps:
