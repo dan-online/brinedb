@@ -15,7 +15,17 @@ const randomData = (length: number) => {
 	return result;
 };
 
-const benchme = async (name: string, db: Brine) => {
+type BrineLike = {
+	init: () => Promise<void>;
+	clear: () => Promise<void>;
+	set: (key: string, value: unknown) => Promise<unknown>;
+	get: (key: string) => Promise<unknown>;
+	setMany: (data: [string, string][]) => Promise<void>;
+	count: () => Promise<number>;
+	close: () => Promise<void>;
+};
+
+const benchme = async (name: string, db: BrineLike) => {
 	const spinner = new Spinner("Initializing database");
 	const bench = new Bench({ time: 1000, warmupTime: 500 });
 
@@ -30,17 +40,22 @@ const benchme = async (name: string, db: Brine) => {
 	await db.clear();
 
 	const setInitialManyData: [string, string][] = [];
+	const size = 1_000;
 
-	for (let i = 0; i < 1_000_000; i++) {
-		setInitialManyData.push([`key-${i}`, randomData(100)]);
+	await new Promise<void>((done) => {
+		for (let i = 0; i < size; i++) {
+			setInitialManyData.push([`key-${i}`, randomData(100)]);
 
-		spinner.update({
-			text: `Setting up database (${i + 1}/1000000) (${(
-				(i / 1_000_000) *
-				100
-			).toFixed(2)}%)`,
-		});
-	}
+			spinner.update({
+				text: `Setting up database (${i + 1}/${size}) (${(
+					(i / size) *
+					100
+				).toFixed(2)}%)`,
+			});
+		}
+
+		done();
+	});
 
 	spinner.update({
 		text: "Setting up database",
@@ -55,10 +70,14 @@ const benchme = async (name: string, db: Brine) => {
 
 	bench
 		.add("get", async () => {
-			await db.get(`key-${Math.floor(Math.random() * 1000)}`);
+			const res = await db.get(`key-${Math.floor(Math.random() * size)}`);
+
+			if (res == null) {
+				throw new Error("Value not found");
+			}
 		})
 		.add("set", async () => {
-			await db.set(`key-${Math.floor(Math.random() * 1000)}`, randomData(100));
+			await db.set(`key-${Math.floor(Math.random() * size)}`, randomData(100));
 		})
 		.add("count", async () => {
 			await db.count();
@@ -111,8 +130,13 @@ const benchme = async (name: string, db: Brine) => {
 		database: "brinedb",
 	};
 
+	const { default: Enmap } = await import("enmap");
+
 	const sqlite_memory = new Brine(BrineDatabases.sqlite.memory);
 	const sqlite_file = new Brine(BrineDatabases.sqlite.file("benchmark.sqlite"));
+	const enmap = new Enmap({
+		name: "benchmark",
+	});
 	const postgres = new Brine(BrineDatabases.postgres.build(login));
 	const mysql = new Brine(BrineDatabases.mysql.build(login));
 	const mariadb = new Brine(
@@ -122,8 +146,23 @@ const benchme = async (name: string, db: Brine) => {
 		}),
 	);
 
-	await benchme("SQLite (Memory)", sqlite_memory);
-	await benchme("SQLite (File)", sqlite_file);
+	await benchme("Brine SQLite (Memory)", sqlite_memory);
+	await benchme("Brine SQLite (File)", sqlite_file);
+	await benchme("Enmap SQLite (File)", {
+		init: async () => {
+			await enmap.defer;
+		},
+		clear: async () => enmap.clear(),
+		set: async (key, value) => enmap.set(key, value),
+		get: async (key) => enmap.get(key),
+		setMany: async (data) => {
+			for (const [key, value] of data) {
+				enmap.set(key, value);
+			}
+		},
+		count: async () => enmap.size,
+		close: async () => {},
+	});
 	await benchme("PostgreSQL", postgres);
 	await benchme("MySQL", mysql);
 	await benchme("MariaDB", mariadb);

@@ -86,10 +86,9 @@ fn set(mut cx: FunctionContext) -> JsResult<JsPromise> {
     rt.spawn(async move {
         let connection = connection(connection_uri).await.expect("Unable to connect");
 
-        // if it already exists, update it
         let model = ActiveDocumentModel {
             key: Set(key.clone()),
-            value: Set(value.clone()),
+            value: Set(value),
         };
 
         let res = Document::insert(model)
