@@ -12,14 +12,14 @@ path = "src/lib.rs"
 
 [dependencies]
 # Default enable napi4 feature, see https://nodejs.org/api/n-api.html#node-api-version-matrix
-napi = { version = "2.12.2", default-features = false, features = [
+napi = { version = "2.16.1", default-features = false, features = [
     "napi4",
     "tokio_rt",
 ] }
 # https://github.com/launchbadge/sqlx/issues/3189
 # https://github.com/launchbadge/sqlx/pull/3190
 time = "=0.3.34"
-napi-derive = "2.12.2"
+napi-derive = "2.16.1"
 sea-orm = { version = "0.12.15", features = [
     "runtime-tokio-native-tls",
     "sqlx-mysql",
