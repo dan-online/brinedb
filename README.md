@@ -1,4 +1,4 @@
-![npm version](https://img.shields.io/npm/v/brinedb)
+![npm version](https://img.shields.io/npm/v/@brine-db/brine)
 
 # BrineDB
 
@@ -28,19 +28,19 @@
 To install and set up the library, run:
 
 ```sh
-$ yarn add brinedb
+$ yarn add @brine-db/brine
 ```
 
 Or if you prefer npm:
 
 ```sh
-$ npm i brinedb
+$ npm i @brine-db/brine
 ```
 
 ## Quick Start
 
 ```js
-const { Brine } = require('brinedb');
+const { Brine } = require('@brine-db/brine');
 
 // SQLite
 const brinedb = new Brine('sqlite::memory:');
@@ -70,7 +70,7 @@ const value = await brinedb.get('key');
 This library is written in Typescript and includes type definitions. Here is an example that will be typed correctly:
 
 ```ts
-import { Brine } from 'brinedb';
+import { Brine } from '@brine-db/brine';
 
 type Value = { hello: string }
 
