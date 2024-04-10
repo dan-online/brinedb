@@ -1,4 +1,4 @@
-import { Brine } from "../../";
+import { Brine } from "../../dist";
 import { Spinner } from "@favware/colorette-spinner";
 import { BrineDatabases } from "../../src";
 import { Bench } from "tinybench";

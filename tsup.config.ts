@@ -4,7 +4,7 @@ export default defineConfig({
 	tsconfig: "./tsconfig.json",
 	clean: true,
 	entry: ["src/index.ts"],
-	external: ["../native/brinedb.node"],
+	external: [/\.node$/],
 	treeshake: false,
 	dts: true,
 	format: ["cjs", "esm"],

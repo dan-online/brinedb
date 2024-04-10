@@ -4,10 +4,11 @@
 		"importHelpers": true,
 		"noEmitHelpers": true,
 		"lib": ["ESNext"],
-		"target": "ES6",
+		"target": "ESNext",
 		"module": "ES6",
 		"moduleResolution": "Bundler",
+		"skipLibCheck": true,
 		"tsBuildInfoFile": ".tsbuildinfo",
-		"skipLibCheck": true
-	}
+	},
+	"exclude": ["benchmark"]
 }

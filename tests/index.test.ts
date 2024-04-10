@@ -1,15 +1,25 @@
 import { afterAll, describe, expect, test } from "vitest";
-import { Brine, BrineDatabases } from "..";
+import { Brine, BrineDatabases } from "../src";
 
-describe("Test suite", () => {
+describe("Brine", () => {
 	let brine: Brine;
 
 	test("can instantiate", async () => {
 		brine = new Brine(BrineDatabases.sqlite.memory);
 	});
 
+	test("can instantiate w/ custom serialization", async () => {
+		const serialize = (value: string) => value;
+		const deserialize = (value: string) => value;
+
+		new Brine(BrineDatabases.sqlite.memory, {
+			serialize,
+			deserialize,
+		});
+	});
+
 	test("can initialize", async () => {
-		expect(brine.get("test")).rejects.toThrowError("Brine not initialized");
+		expect(brine.get("test")).rejects.toThrowError("No connection found");
 
 		await brine.init();
 	});
@@ -138,10 +148,72 @@ describe("Test suite", () => {
 	test("can close", async () => {
 		await brine.close();
 
-		expect(brine.get("test")).rejects.toThrowError("Brine not initialized");
+		expect(brine.get("test")).rejects.toThrowError("No connection found");
 	});
 
 	afterAll(async () => {
 		await brine.close();
+	});
+});
+
+describe("BrineDatabase", () => {
+	describe("sqlite", () => {
+		test("memory", async () => {
+			expect(BrineDatabases.sqlite.memory).toEqual("sqlite::memory:");
+		});
+
+		test("file", async () => {
+			expect(BrineDatabases.sqlite.file("test.db")).toEqual(
+				"sqlite:test.db?mode=rwc",
+			);
+		});
+	});
+
+	describe("mysql", () => {
+		test("build", async () => {
+			expect(
+				BrineDatabases.mysql.build({
+					user: "user",
+					password: "pass",
+					database: "brinedb",
+				}),
+			).toEqual("mysql://user:pass@localhost:3306/brinedb");
+		});
+
+		test("build with host/port", async () => {
+			expect(
+				BrineDatabases.mysql.build({
+					user: "user",
+					password: "pass",
+					database: "brinedb",
+					host: "localhost",
+					port: 3307,
+				}),
+			).toEqual("mysql://user:pass@localhost:3307/brinedb");
+		});
+	});
+
+	describe("postgres", () => {
+		test("build", async () => {
+			expect(
+				BrineDatabases.postgres.build({
+					user: "user",
+					password: "pass",
+					database: "brinedb",
+				}),
+			).toEqual("postgres://user:pass@localhost:5432/brinedb");
+		});
+
+		test("build with host/port", async () => {
+			expect(
+				BrineDatabases.postgres.build({
+					user: "user",
+					password: "pass",
+					database: "brinedb",
+					host: "localhost",
+					port: 5433,
+				}),
+			).toEqual("postgres://user:pass@localhost:5433/brinedb");
+		});
 	});
 });

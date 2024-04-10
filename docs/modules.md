@@ -1,6 +1,6 @@
-[brinedb](README.md) / Exports
+[@brinedb/brine](README.md) / Exports
 
-# brinedb
+# @brinedb/brine
 
 ## Table of contents
 
@@ -46,4 +46,4 @@ Renames and re-exports [Brine](classes/Brine.md)
 
 #### Defined in
 
-[utils.ts:1](https://github.com/dan-online/brinedb/blob/ab25ca8/src/utils.ts#L1)
+[utils.ts:1](https://github.com/dan-online/brinedb/blob/6c3396da21325bef297b5532fc2d6f594f1ff6ce/src/utils.ts#L1)

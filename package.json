@@ -1,68 +1,42 @@
 {
-  "name": "brinedb",
-  "version": "1.0.0",
-  "description": "SeaORM wrapper for NodeJS, providing basic key/value storage in sqlite/postgres/mysql",
+  "name": "@brinedb/brine",
+  "version": "2.0.0",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "description": "SeaORM wrapper for NodeJS, providing basic key/value storage in sqlite/postgres/mysql",
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "yarn build:rs && yarn build:ts",
+    "build:ts": "tsup",
+    "build:rs": "napi build --platform --release native",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublish -t npm",
+    "test": "vitest run",
+    "universal": "napi universal",
+    "version": "napi version",
+    "lint": "biome check src/**/*.ts",
+    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs --excludeExternals --exclude benchmark/ --externalPattern '**/node_modules/**' src/index.ts"
+  },
+  "napi": {
+    "name": "brine",
+    "triples": {}
+  },
   "workspaces": [
     "benchmark"
-  ],
-  "scripts": {
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "build:ts": "tsup",
-    "build": "yarn build:release && yarn build:ts",
-    "build:rust": "cargo-cp-artifact -nc index.node -- cargo build --workspace --message-format=json-render-diagnostics",
-    "build:debug": "yarn build:rust && yarn move-native",
-    "build:release": "yarn build:rust --release && yarn move-native",
-    "benchmark": "yarn build:release && BENCHMARK=true yarn build:ts && node dist/benchmark.js",
-    "release-native": "yarn build:release",
-    "move-native": "rm -rf native && mkdir native && mv ./index.node ./native/brinedb.node",
-    "lint": "biome check src/**/*.ts",
-    "docs": "typedoc --plugin typedoc-plugin-markdown --out docs src/index.ts --excludeExternals --externalPattern '**/node_modules/**'"
-  },
-  "binary": {
-    "module_name": "brinedb",
-    "module_path": "./native",
-    "host": "https://github.com/dan-online/brinedb/releases/download/",
-    "package_name": "{module_name}-v{version}-{node_abi}-{platform}-{arch}-{libc}.tar.gz",
-    "remote_path": "v{version}"
-  },
-  "author": "DanCodes <dan@dancodes.online>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/dan-online/brinedb.git"
-  },
-  "keywords": [
-    "sqlite",
-    "postgres",
-    "mysql",
-    "seaorm",
-    "kv",
-    "database",
-    "key-value",
-    "storage"
   ],
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.6.4",
-    "@favware/colorette-spinner": "^1.0.1",
+    "@napi-rs/cli": "^2.18.0",
     "@sapphire/ts-config": "^5.0.1",
-    "@swc/core": "^1.4.12",
-    "@types/node": "^20.12.5",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@vitest/coverage-istanbul": "^1.4.0",
     "@vitest/coverage-v8": "^1.4.0",
-    "cargo-cp-artifact": "^0.1.8",
+    "tslib": "^2.6.2",
     "tsup": "^8.0.2",
-    "typedoc": "^0.25.12",
+    "typedoc": "^0.25.13",
     "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.4.4",
     "vitest": "^1.4.0"
-  },
-  "dependencies": {
-    "@mapbox/node-pre-gyp": "^1.0.11"
   },
   "packageManager": "yarn@4.1.1"
 }
