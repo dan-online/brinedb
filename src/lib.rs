@@ -6,6 +6,8 @@ use migration::MigratorTrait;
 use migration::OnConflict;
 use napi::bindgen_prelude::*;
 use sea_orm::ColumnTrait;
+use sea_orm::ConnectOptions;
+use sea_orm::ConnectionTrait;
 use sea_orm::DatabaseConnection;
 use sea_orm::EntityTrait;
 use sea_orm::PaginatorTrait;
@@ -34,9 +36,22 @@ impl BrineDB {
 
   #[napi]
   pub async unsafe fn connect(&mut self) -> Result<bool> {
-    let connection = sea_orm::Database::connect(&self.connection_uri)
+    let opt = ConnectOptions::new(&self.connection_uri);
+
+    let connection = sea_orm::Database::connect(opt)
       .await
       .map_err(|err| Error::new(Status::GenericFailure, err.to_string()))?;
+
+    if self.connection_uri.starts_with("sqlite") {
+      connection
+        .execute_unprepared("PRAGMA journal_mode = wal;")
+        .await
+        .map_err(|err| Error::new(Status::GenericFailure, err.to_string()))?;
+      connection
+        .execute_unprepared("PRAGMA synchronous = 1;")
+        .await
+        .map_err(|err| Error::new(Status::GenericFailure, err.to_string()))?;
+    }
 
     self.connection = Some(connection);
 
@@ -83,12 +98,12 @@ impl BrineDB {
       .as_ref()
       .ok_or_else(|| Error::new(Status::GenericFailure, "No connection found"))?;
 
-    let doc = ActiveDocumentModel {
+    let model = ActiveDocumentModel {
       key: Set(key),
       value: Set(value),
     };
 
-    Document::insert(doc)
+    Document::insert(model)
       .on_conflict(
         OnConflict::column(DocumentColumn::Key)
           .update_column(DocumentColumn::Value)

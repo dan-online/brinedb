@@ -17,7 +17,9 @@ impl MigrationTrait for Migration {
           .col(ColumnDef::new(Brine::Value).text())
           .to_owned(),
       )
-      .await
+      .await?;
+
+    Ok(())
   }
 
   async fn down(&self, _manager: &SchemaManager) -> Result<(), DbErr> {
