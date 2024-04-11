@@ -218,6 +218,12 @@ class Brine<T = unknown> {
 	 *
 	 * @param data An array of 2d arrays containing keys and values
 	 * @returns Promise<void>
+	 * @example
+	 * ```ts
+	 * await brinedb.setMany([
+	 *  ["key1", "value1"],
+	 *  ["key2", "value2"],
+	 * ]);
 	 */
 	public async setMany(data: [string, T][]) {
 		const serializedData = (await Promise.all(
@@ -225,6 +231,56 @@ class Brine<T = unknown> {
 		)) as [string, string][];
 
 		await this.db.setMany(serializedData);
+	}
+
+	/**
+	 * Get many keys from the database
+	 *
+	 * @param keys The keys to get
+	 * @returns Promise<[string, string][]>
+	 * @example
+	 * ```ts
+	 * const data = await brinedb.getMany(["key1", "key2"]);
+	 * ```
+	 */
+	public async getMany(keys: string[]): Promise<Record<string, T | null>> {
+		const result = await this.db.getMany(keys);
+
+		const parsed: Record<string, T | null> = {};
+
+		for (const [key, value] of Object.entries(result)) {
+			parsed[key] = value ? await this.deserialize(value) : null;
+		}
+
+		return parsed;
+	}
+
+	/**
+	 * Get all keys from the database
+	 *
+	 * @returns Promise<string[]>
+	 * @example
+	 * ```ts
+	 * const keys = await brinedb.keys();
+	 * ```
+	 */
+	public async keys() {
+		return this.db.keys();
+	}
+
+	/**
+	 * Get all values from the database
+	 *
+	 * @returns Promise<T[]>
+	 * @example
+	 * ```ts
+	 * const values = await brinedb.values();
+	 * ```
+	 */
+	public async values() {
+		const values = await this.db.values();
+
+		return Promise.all(values.map((value) => this.deserialize(value)));
 	}
 
 	/**

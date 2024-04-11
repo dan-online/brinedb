@@ -22,13 +22,6 @@ napi = { version = "2.16.1", default-features = false, features = [
 # https://github.com/launchbadge/sqlx/pull/3190
 time = "=0.3.34"
 napi-derive = "2.16.1"
-sea-orm = { version = "0.12.15", features = [
-    "runtime-tokio-native-tls",
-    "sqlx-mysql",
-    "sqlx-postgres",
-    "sqlx-sqlite",
-    "macros"
-] }
 brinedb-entity = { path = "crates/entity" }
 brinedb-migration = { path = "crates/migration" }
 

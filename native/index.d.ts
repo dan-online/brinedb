@@ -12,7 +12,7 @@ export class BrineDb {
   get(key: string): Promise<string | null>
   set(key: string, value: string): Promise<void>
   setMany(data: Array<[string, string]>): Promise<void>
-  getMany(keys: Array<string>): Promise<Array<Array<string>>>
+  getMany(keys: Array<string>): Promise<Record<string, string | undefined | null>>
   clear(): Promise<void>
   delete(key: string): Promise<void>
   deleteMany(keys: Array<string>): Promise<void>

@@ -119,6 +119,15 @@ describe("Brine", () => {
 		expect(value2).toBe(false);
 	});
 
+	test("can get many", async () => {
+		const data = await brine.getMany(["hello", "key"]);
+
+		expect(data).toEqual({
+			hello: "world",
+			key: null,
+		});
+	});
+
 	test("can clear", async () => {
 		await brine.clear();
 
@@ -143,6 +152,18 @@ describe("Brine", () => {
 		expect(value1).toBe("value1");
 		expect(value2).toBe("value2");
 		expect(value3).toBe("value3");
+	});
+
+	test("can keys", async () => {
+		const keys = await brine.keys();
+
+		expect(keys).toEqual(["key1", "key2", "key3"]);
+	});
+
+	test("can values", async () => {
+		const values = await brine.values();
+
+		expect(values).toEqual(["value1", "value2", "value3"]);
 	});
 
 	test("can close", async () => {

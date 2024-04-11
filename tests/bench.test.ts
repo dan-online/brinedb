@@ -17,9 +17,13 @@ const randomData = (length: number) => {
 describe("Benchmark", () => {
 	test("Brine", async () => {
 		const bench = new Bench({ time: 200 });
-		const brinedb = new Brine(BrineDatabases.sqlite.file("test.sqlite"));
+		const brinedb = new Brine(BrineDatabases.sqlite.file("test.sqlite"), {
+			serialize: (value) => value as string,
+			deserialize: (value) => value,
+		});
 
 		await brinedb.init();
+		await brinedb.clear();
 
 		const setInitialManyData: [string, string][] = [];
 		const size = 1_000;
@@ -36,19 +40,22 @@ describe("Benchmark", () => {
 
 		bench
 			.add("get", async () => {
-				const res = await brinedb.get(
-					`key-${Math.floor(Math.random() * size)}`,
-				);
-
-				if (res == null) {
-					throw new Error("Value not found");
-				}
+				await brinedb.get(`key-${Math.floor(Math.random() * size)}`);
 			})
 			.add("set", async () => {
 				await brinedb.set(
 					`key-${Math.floor(Math.random() * size)}`,
 					randomData(100),
 				);
+			})
+			.add("getMany", async () => {
+				await brinedb.getMany(setInitialManyData.map(([key]) => key));
+			})
+			.add("keys", async () => {
+				await brinedb.keys();
+			})
+			.add("values", async () => {
+				await brinedb.values();
 			})
 			.add("count", async () => {
 				await brinedb.count();

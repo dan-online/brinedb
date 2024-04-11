@@ -10,7 +10,7 @@
     "build": "yarn build:rs && yarn build:ts",
     "build:ts": "tsup",
     "build:rs": "napi build --platform --release native",
-    "build:debug": "napi build --platform",
+    "build:rs:debug": "napi build --platform",
     "prepublishOnly": "napi prepublish -t npm --skip-gh-release",
     "test": "vitest run",
     "universal": "napi universal",

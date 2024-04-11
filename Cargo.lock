@@ -464,7 +464,6 @@ dependencies = [
  "napi",
  "napi-build",
  "napi-derive",
- "sea-orm",
  "time",
 ]
 
