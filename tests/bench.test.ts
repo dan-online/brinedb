@@ -1,7 +1,6 @@
 import { describe, test } from "vitest";
 import { Bench } from "tinybench";
-import Brine from "../src";
-import { BrineDatabases } from "../dist";
+import { Brine, BrineDatabases } from "../src";
 
 const randomData = (length: number) => {
 	const chars =
