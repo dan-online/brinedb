@@ -208,6 +208,10 @@ jobs:
 
           git config --global user.email "dan@dancodes.online"
           git config --global user.name "DanCodes"
+
+          jq 'del(.optionalDependencies)' package.json > package.json.tmp
+          mv package.json.tmp package.json
+
           git add .
           git commit -m "feat: release $npm_package_version [skip ci]"
           git push origin HEAD:main

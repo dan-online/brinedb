@@ -39,10 +39,5 @@
     "typescript": "^5.4.4",
     "vitest": "^1.4.0"
   },
-  "packageManager": "yarn@4.1.1",
-  "optionalDependencies": {
-    "@brine-db/brine-win32-x64-msvc": "2.0.0",
-    "@brine-db/brine-darwin-x64": "2.0.0",
-    "@brine-db/brine-linux-x64-gnu": "2.0.0"
-  }
+  "packageManager": "yarn@4.1.1"
 }
