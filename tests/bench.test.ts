@@ -58,5 +58,7 @@ describe("Benchmark", () => {
 		await bench.run();
 
 		console.table(bench.table());
+
+		await brinedb.close();
 	});
 });

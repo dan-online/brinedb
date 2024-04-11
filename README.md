@@ -49,10 +49,7 @@ const brinedb = new Brine('sqlite:/path/to/database.sqlite');
 // Postgres
 const brinedb = new Brine('postgres://user:pass@localhost:5432/dbname');
 
-// MariaDB
-const brinedb = new Brine('mariadb://user:pass@localhost:3306/dbname');
-
-// MySQL
+// MySQL/MariaDB
 const brinedb = new Brine('mysql://user:pass@localhost:3306/dbname');
 
 // Initialize the database (also runs migrations)
@@ -78,14 +75,16 @@ const brinedb = new Brine<Value>('sqlite::memory:');
 
 await brinedb.set('key', { hello: 'world' });
 
-const decoded = brinedb.get('key'); // Correctly typed
+const decoded = brinedb.get('key');
+
+typeof decoded.hello; // string
 ```
 
 ## Development
 
 ### Prerequisites
 
-This project requires NodeJS (version 20 or later) and yarn.
+This project requires NodeJS (version 18 or later) and yarn.
 [Node](http://nodejs.org) and [Yarn](https://yarnpkg.com/) are really easy to install.
 To make sure you have them available on your machine,
 try running the following command.
@@ -119,7 +118,7 @@ inside your local `dist/` folder and output a binary in `native/`
 
 ## Built With
 
-- [Neon](https://neon-bindings.com/)
+- [Napi-RS](https://napi.rs/)
 - [SeaORM](https://www.sea-ql.org/SeaORM/)
 - VSCode
 - TypeScript
@@ -135,4 +134,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## License
 
-[MIT License](https://dan-online.mit-license.org/2024) © DanCodes
+[MIT License](https://dancodes.mit-license.org/2024) © DanCodes
