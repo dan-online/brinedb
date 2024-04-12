@@ -4,7 +4,7 @@
 
 # BrineDB
 
-[SeaORM](https://www.sea-ql.org/SeaORM/) wrapper for NodeJS, providing basic key/value storage in SQLite/Postgres/MySQL/MariaDB.
+[Diesel](https://diesel.rs/) wrapper for NodeJS, providing basic key/value storage in SQLite/Postgres/MySQL/MariaDB.
 
 ## Table of contents
 
@@ -45,8 +45,8 @@ $ npm i @brine-db/brine
 const { Brine } = require('@brine-db/brine');
 
 // SQLite
-const brinedb = new Brine('sqlite::memory:');
-const brinedb = new Brine('sqlite:/path/to/database.sqlite');
+const brinedb = new Brine('sqlite://:memory:');
+const brinedb = new Brine('sqlite://database.sqlite');
 
 // Postgres
 const brinedb = new Brine('postgres://user:pass@localhost:5432/dbname');
@@ -69,11 +69,11 @@ const value = await brinedb.get('key');
 This library is written in Typescript and includes type definitions. Here is an example that will be typed correctly:
 
 ```ts
-import { Brine } from '@brine-db/brine';
+import { Brine, BrineDatabases } from '@brine-db/brine';
 
 type Value = { hello: string }
 
-const brinedb = new Brine<Value>('sqlite::memory:');
+const brinedb = new Brine<Value>(BrineDatabases.sqlite.memory);
 
 await brinedb.set('key', { hello: 'world' });
 
@@ -121,7 +121,7 @@ inside your local `dist/` folder and output a binary in `native/`
 ## Built With
 
 - [Napi-RS](https://napi.rs/)
-- [SeaORM](https://www.sea-ql.org/SeaORM/)
+- [Diesel](https://diesel.rs/)
 - VSCode
 - TypeScript
 - Rust

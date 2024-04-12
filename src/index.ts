@@ -19,7 +19,7 @@ export interface BrineOptions<T> {
 }
 
 /**
- * Brine is a simple key-value store that persists data using Rust SeaORM bindings
+ * Brine is a simple key-value store that persists data using Rust bindings
  *
  * @example
  * ```ts
