@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "description": "SeaORM wrapper for NodeJS, providing basic key/value storage in sqlite/postgres/mysql",
+  "description": "Diesel wrapper for NodeJS, providing basic key/value storage in sqlite/postgres/mysql",
   "scripts": {
     "artifacts": "napi artifacts",
     "build": "yarn build:rs && yarn build:ts",
