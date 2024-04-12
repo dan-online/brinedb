@@ -40,10 +40,10 @@ Renames and re-exports [Brine](classes/Brine.md)
 | `mysql.build` | (`options`: \{ `database`: `string` ; `host?`: `string` ; `password`: `string` ; `port?`: `number` ; `user`: `string`  }) => `string` |
 | `postgres` | \{ `build`: (`options`: \{ `database`: `string` ; `host?`: `string` ; `password`: `string` ; `port?`: `number` ; `user`: `string`  }) => `string`  } |
 | `postgres.build` | (`options`: \{ `database`: `string` ; `host?`: `string` ; `password`: `string` ; `port?`: `number` ; `user`: `string`  }) => `string` |
-| `sqlite` | \{ `file`: (`path`: `string`) => `string` ; `memory`: `string` = "sqlite::memory:" } |
+| `sqlite` | \{ `file`: (`path`: `string`) => `string` ; `memory`: `string` = "sqlite://:memory:" } |
 | `sqlite.file` | (`path`: `string`) => `string` |
 | `sqlite.memory` | `string` |
 
 #### Defined in
 
-[utils.ts:1](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/utils.ts#L1)
+[utils.ts:1](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/utils.ts#L1)

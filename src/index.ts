@@ -68,9 +68,9 @@ class Brine<T = unknown> {
 	 * await brinedb.init();
 	 * ```
 	 */
-	public async init() {
-		await this.db.connect();
-		await this.db.migrate();
+	public init() {
+		this.db.connect();
+		this.db.migrate();
 	}
 
 	/**
@@ -85,7 +85,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async get(key: string): Promise<T | null> {
-		const result = await this.db.get(key);
+		const result = this.db.get(key);
 
 		const parsed: T | null = result ? await this.deserialize(result) : null;
 
@@ -108,7 +108,7 @@ class Brine<T = unknown> {
 	public async set(key: string, value: T): Promise<T> {
 		const serializedValue = await this.serialize(value);
 
-		await this.db.set(key, serializedValue);
+		this.db.set(key, serializedValue);
 
 		return value;
 	}
@@ -123,8 +123,8 @@ class Brine<T = unknown> {
 	 * await brinedb.clear();
 	 * ```
 	 */
-	public async clear() {
-		await this.db.clear();
+	public clear() {
+		this.db.clear();
 	}
 
 	/**
@@ -138,8 +138,8 @@ class Brine<T = unknown> {
 	 * await brinedb.delete("key");
 	 * ```
 	 */
-	public async delete(key: string): Promise<void> {
-		await this.db.delete(key);
+	public delete(key: string) {
+		this.db.delete(key);
 	}
 
 	/**
@@ -153,8 +153,8 @@ class Brine<T = unknown> {
 	 * await brinedb.deleteMany(["key1", "key2"]);
 	 * ```
 	 */
-	public async deleteMany(keys: string[]): Promise<void> {
-		await this.db.deleteMany(keys);
+	public deleteMany(keys: string[]) {
+		this.db.deleteMany(keys);
 	}
 
 	/**
@@ -167,7 +167,7 @@ class Brine<T = unknown> {
 	 * const count = await brinedb.count();
 	 * ```
 	 */
-	public async count() {
+	public count() {
 		return this.db.count();
 	}
 
@@ -209,7 +209,7 @@ class Brine<T = unknown> {
 	 * const exists = await brinedb.has("key");
 	 * ```
 	 */
-	public async has(key: string): Promise<boolean> {
+	public has(key: string) {
 		return this.db.has(key);
 	}
 
@@ -230,7 +230,7 @@ class Brine<T = unknown> {
 			data.map(async ([key, value]) => [key, await this.serialize(value)]),
 		)) as [string, string][];
 
-		await this.db.setMany(serializedData);
+		this.db.setMany(serializedData);
 	}
 
 	/**
@@ -244,7 +244,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async getMany(keys: string[]): Promise<Record<string, T | null>> {
-		const result = await this.db.getMany(keys);
+		const result = this.db.getMany(keys);
 
 		const parsed: Record<string, T | null> = {};
 
@@ -264,7 +264,7 @@ class Brine<T = unknown> {
 	 * const keys = await brinedb.keys();
 	 * ```
 	 */
-	public async keys() {
+	public keys() {
 		return this.db.keys();
 	}
 
@@ -278,7 +278,7 @@ class Brine<T = unknown> {
 	 * ```
 	 */
 	public async values() {
-		const values = await this.db.values();
+		const values = this.db.values();
 
 		return Promise.all(values.map((value) => this.deserialize(value)));
 	}
@@ -293,8 +293,8 @@ class Brine<T = unknown> {
 	 * await brinedb.close();
 	 * ```
 	 */
-	public async close() {
-		await this.db.close();
+	public close() {
+		this.db.close();
 	}
 
 	private async serialize(value: T): Promise<string> {

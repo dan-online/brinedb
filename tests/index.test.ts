@@ -180,13 +180,11 @@ describe("Brine", () => {
 describe("BrineDatabase", () => {
 	describe("sqlite", () => {
 		test("memory", async () => {
-			expect(BrineDatabases.sqlite.memory).toEqual("sqlite::memory:");
+			expect(BrineDatabases.sqlite.memory).toEqual("sqlite://:memory:");
 		});
 
 		test("file", async () => {
-			expect(BrineDatabases.sqlite.file("test.db")).toEqual(
-				"sqlite:test.db?mode=rwc",
-			);
+			expect(BrineDatabases.sqlite.file("test.db")).toEqual("sqlite://test.db");
 		});
 	});
 
