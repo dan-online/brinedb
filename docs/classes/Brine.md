@@ -32,8 +32,8 @@ const value = await brine.get("key");
 ### Properties
 
 - [db](Brine.md#db)
-- [deserialize](Brine.md#deserialize)
-- [serialize](Brine.md#serialize)
+- [internalDeserialize](Brine.md#internaldeserialize)
+- [internalSerialize](Brine.md#internalserialize)
 
 ### Methods
 
@@ -42,12 +42,17 @@ const value = await brine.get("key");
 - [count](Brine.md#count)
 - [delete](Brine.md#delete)
 - [deleteMany](Brine.md#deletemany)
+- [deserialize](Brine.md#deserialize)
 - [ensure](Brine.md#ensure)
 - [get](Brine.md#get)
+- [getMany](Brine.md#getmany)
 - [has](Brine.md#has)
 - [init](Brine.md#init)
+- [keys](Brine.md#keys)
+- [serialize](Brine.md#serialize)
 - [set](Brine.md#set)
 - [setMany](Brine.md#setmany)
+- [values](Brine.md#values)
 
 ## Constructors
 
@@ -76,7 +81,7 @@ Create a new Brine instance
 
 #### Defined in
 
-[index.ts:48](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L48)
+[index.ts:49](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L49)
 
 ## Properties
 
@@ -86,13 +91,13 @@ Create a new Brine instance
 
 #### Defined in
 
-[index.ts:37](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L37)
+[index.ts:37](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L37)
 
 ___
 
-### deserialize
+### internalDeserialize
 
-• `Private` **deserialize**: (`value`: `string`) => `T` \| `Promise`\<`T`\> = `JSON.parse`
+• `Private` **internalDeserialize**: (`value`: `string`) => `T` \| `Promise`\<`T`\> = `JSON.parse`
 
 #### Type declaration
 
@@ -110,13 +115,13 @@ ___
 
 #### Defined in
 
-[index.ts:39](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L39)
+[index.ts:39](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L39)
 
 ___
 
-### serialize
+### internalSerialize
 
-• `Private` **serialize**: (`value`: `T`) => `string` \| `Promise`\<`string`\> = `JSON.stringify`
+• `Private` **internalSerialize**: (`value`: `T`) => `string` \| `Promise`\<`string`\> = `JSON.stringify`
 
 #### Type declaration
 
@@ -134,19 +139,19 @@ ___
 
 #### Defined in
 
-[index.ts:40](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L40)
+[index.ts:40](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L40)
 
 ## Methods
 
 ### clear
 
-▸ **clear**(): `Promise`\<`void`\>
+▸ **clear**(): `void`
 
 Clear all values from the database
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
 Promise<void>
 
@@ -158,19 +163,19 @@ await brinedb.clear();
 
 #### Defined in
 
-[index.ts:125](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L125)
+[index.ts:126](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L126)
 
 ___
 
 ### close
 
-▸ **close**(): `Promise`\<`void`\>
+▸ **close**(): `void`
 
 Close the connection to the database
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
 Promise<void>
 
@@ -182,19 +187,19 @@ await brinedb.close();
 
 #### Defined in
 
-[index.ts:239](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L239)
+[index.ts:296](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L296)
 
 ___
 
 ### count
 
-▸ **count**(): `Promise`\<`number`\>
+▸ **count**(): `number`
 
 Count all documents in the database
 
 #### Returns
 
-`Promise`\<`number`\>
+`number`
 
 Promise<number>
 
@@ -206,13 +211,13 @@ const count = await brinedb.count();
 
 #### Defined in
 
-[index.ts:169](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L169)
+[index.ts:170](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L170)
 
 ___
 
 ### delete
 
-▸ **delete**(`key`): `Promise`\<`void`\>
+▸ **delete**(`key`): `void`
 
 Delete a key from the database
 
@@ -224,7 +229,7 @@ Delete a key from the database
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
 Promise<void>
 
@@ -236,13 +241,13 @@ await brinedb.delete("key");
 
 #### Defined in
 
-[index.ts:140](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L140)
+[index.ts:141](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L141)
 
 ___
 
 ### deleteMany
 
-▸ **deleteMany**(`keys`): `Promise`\<`void`\>
+▸ **deleteMany**(`keys`): `void`
 
 Delete multiple keys from the database
 
@@ -254,7 +259,7 @@ Delete multiple keys from the database
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
 Promise<void>
 
@@ -266,7 +271,27 @@ await brinedb.deleteMany(["key1", "key2"]);
 
 #### Defined in
 
-[index.ts:155](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L155)
+[index.ts:156](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L156)
+
+___
+
+### deserialize
+
+▸ **deserialize**(`value`): `Promise`\<`T`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `string` |
+
+#### Returns
+
+`Promise`\<`T`\>
+
+#### Defined in
+
+[index.ts:304](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L304)
 
 ___
 
@@ -303,7 +328,7 @@ changed === "value"; // true
 
 #### Defined in
 
-[index.ts:191](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L191)
+[index.ts:192](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L192)
 
 ___
 
@@ -333,13 +358,43 @@ const value = await brinedb.get("key");
 
 #### Defined in
 
-[index.ts:86](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L86)
+[index.ts:87](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L87)
+
+___
+
+### getMany
+
+▸ **getMany**(`keys`): `Promise`\<`Record`\<`string`, ``null`` \| `T`\>\>
+
+Get many keys from the database
+
+#### Parameters
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `keys` | `string`[] | The keys to get |
+
+#### Returns
+
+`Promise`\<`Record`\<`string`, ``null`` \| `T`\>\>
+
+Promise<[string, string][]>
+
+**`Example`**
+
+```ts
+const data = await brinedb.getMany(["key1", "key2"]);
+```
+
+#### Defined in
+
+[index.ts:246](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L246)
 
 ___
 
 ### has
 
-▸ **has**(`key`): `Promise`\<`boolean`\>
+▸ **has**(`key`): `boolean`
 
 Check if a key exists in the database
 
@@ -351,7 +406,7 @@ Check if a key exists in the database
 
 #### Returns
 
-`Promise`\<`boolean`\>
+`boolean`
 
 Promise<boolean>
 
@@ -363,19 +418,19 @@ const exists = await brinedb.has("key");
 
 #### Defined in
 
-[index.ts:211](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L211)
+[index.ts:212](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L212)
 
 ___
 
 ### init
 
-▸ **init**(): `Promise`\<`void`\>
+▸ **init**(): `void`
 
 Initialize the Brine instance and run migrations
 
 #### Returns
 
-`Promise`\<`void`\>
+`void`
 
 Promise<void>
 
@@ -387,7 +442,51 @@ await brinedb.init();
 
 #### Defined in
 
-[index.ts:70](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L70)
+[index.ts:71](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L71)
+
+___
+
+### keys
+
+▸ **keys**(): `string`[]
+
+Get all keys from the database
+
+#### Returns
+
+`string`[]
+
+Promise<string[]>
+
+**`Example`**
+
+```ts
+const keys = await brinedb.keys();
+```
+
+#### Defined in
+
+[index.ts:267](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L267)
+
+___
+
+### serialize
+
+▸ **serialize**(`value`): `Promise`\<`string`\>
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `value` | `T` |
+
+#### Returns
+
+`Promise`\<`string`\>
+
+#### Defined in
+
+[index.ts:300](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L300)
 
 ___
 
@@ -419,7 +518,7 @@ await brinedb.set("key", "value");
 
 #### Defined in
 
-[index.ts:107](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L107)
+[index.ts:108](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L108)
 
 ___
 
@@ -441,6 +540,38 @@ Set many keys in the database
 
 Promise<void>
 
+**`Example`**
+
+```ts
+await brinedb.setMany([
+ ["key1", "value1"],
+ ["key2", "value2"],
+]);
+
 #### Defined in
 
-[index.ts:221](https://github.com/dan-online/brinedb/blob/e69184f5117bdb7c0353fe309db857f80b55703a/src/index.ts#L221)
+[index.ts:228](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L228)
+
+___
+
+### values
+
+▸ **values**(): `Promise`\<`Awaited`\<`T`\>[]\>
+
+Get all values from the database
+
+#### Returns
+
+`Promise`\<`Awaited`\<`T`\>[]\>
+
+Promise<T[]>
+
+**`Example`**
+
+```ts
+const values = await brinedb.values();
+```
+
+#### Defined in
+
+[index.ts:280](https://github.com/dan-online/brinedb/blob/70d78dabe73277d76831b5ae408ea4f2b7fdcde9/src/index.ts#L280)

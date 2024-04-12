@@ -3,14 +3,14 @@ export const BrineDatabases = {
 		/**
 		 * In-memory SQLite database
 		 */
-		memory: "sqlite::memory:",
+		memory: "sqlite://:memory:",
 		/**
 		 * SQLite database stored on disk
 		 *
 		 * @param path
 		 * @returns The connection URI
 		 */
-		file: (path: string) => `sqlite:${path}?mode=rwc`,
+		file: (path: string) => `sqlite://${path}`,
 	},
 	postgres: {
 		/**
