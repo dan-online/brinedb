@@ -33,13 +33,9 @@ jobs:
           - host: macos-latest
             target: x86_64-apple-darwin
             build: |
-              brew install postgresql
+              brew install postgresql sqlite mariadb@10.5
 
-              brew install sqlite
-
-              brew install mariadb@10.5
-
-              echo "MYSQLCLIENT_LIB_DIR=/usr/local/opt/mariadb@10.5/lib" >> $GITHUB_ENV
+              export MYSQLCLIENT_LIB_DIR=/usr/local/opt/mariadb@10.5/lib
 
               yarn build
           - host: windows-latest
