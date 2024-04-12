@@ -28,7 +28,7 @@ describe("Benchmark", () => {
 			const size = 1_000;
 
 			for (let i = 0; i < size; i++) {
-				setInitialManyData.push([`key-${i}`, randomData(10)]);
+				setInitialManyData.push([`key-${i}`, randomData(100)]);
 			}
 
 			await brinedb.setMany(setInitialManyData);
