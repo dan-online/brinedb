@@ -45,6 +45,9 @@ jobs:
               choco install sqlite
 
               choco install mysql
+
+              setx /M PATH "C:\tools\mysql\current\lib;C:\tools\mysql\current\bin;%PATH%"
+              setx /M MYSQLCLIENT_LIB_DIR "C:\tools\mysql\current\lib"
               
               yarn build
             target: x86_64-pc-windows-msvc
