@@ -49,6 +49,7 @@ jobs:
               # setx /M PATH "C:\tools\mysql\current\lib;C:\tools\mysql\current\bin;%PATH%"
               # setx /M MYSQLCLIENT_LIB_DIR "C:\tools\mysql\current\lib"
               set MYSQLCLIENT_LIB_DIR=C:\tools\mysql\current\lib
+              set PATH=C:\tools\mysql\current\lib;C:\tools\mysql\current\bin;%PATH%
               
               yarn build
             target: x86_64-pc-windows-msvc
