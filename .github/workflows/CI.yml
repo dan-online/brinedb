@@ -43,10 +43,6 @@ jobs:
 
               choco install sqlite
 
-              cd "C:\ProgramData\chocolatey\lib\SQLite\tools"
-              call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-              lib /machine:x64 /def:sqlite3.def /out:sqlite3.lib
-
               choco install mysql
 
               echo "MYSQLCLIENT_LIB_DIR=C:\tools\mysql\current\lib" >> $GITHUB_ENV
@@ -57,6 +53,10 @@ jobs:
               echo "SQLITE3_LIB_DIR=C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_ENV
               
               echo "PQ_LIB_DIR=C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_ENV
+            setup_cmd:
+              cd /D "C:\ProgramData\chocolatey\lib\SQLite\tools"
+              call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+              lib /machine:x64 /def:sqlite3.def /out:sqlite3.lib
             build: yarn build
             target: x86_64-pc-windows-msvc
           - host: ubuntu-latest
@@ -125,6 +125,10 @@ jobs:
         run: ${{ matrix.settings.setup }}
         if: ${{ !matrix.settings.docker }}
         shell: bash
+      - name: Setup (Windows Extra)
+        run: ${{ matrix.settings.setup_cmd }}
+        if: ${{ !matrix.settings.docker && matrix.settings.setup_cmd }}
+        shell: cmd
       - name: Test (Rust)
         run: cargo test --all
         if: ${{ !matrix.settings.docker }}
