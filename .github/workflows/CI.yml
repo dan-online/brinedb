@@ -39,10 +39,6 @@ jobs:
             build: yarn build
           - host: windows-latest
             setup: |
-              choco install postgresql12 --force --params '/Password:root'
-
-              choco install mysql
-
               echo "MYSQLCLIENT_LIB_DIR=C:\tools\mysql\current\lib" >> $GITHUB_ENV
               echo "C:\tools\mysql\current\lib" >> $GITHUB_PATH
               echo "C:\tools\mysql\current\bin" >> $GITHUB_PATH
@@ -51,11 +47,18 @@ jobs:
               echo "SQLITE3_LIB_DIR=C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_ENV
               
               echo "PQ_LIB_DIR=C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_ENV
+              echo "C:\Program Files\PostgreSQL\12\bin" >> $GITHUB_PATH
+              echo "C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_PATH
             setup_cmd: |
               choco install sqlite
+
               cd /D C:\ProgramData\chocolatey\lib\SQLite\tools
               call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
               lib /machine:x64 /def:sqlite3.def /out:sqlite3.lib
+
+              choco install postgresql12 --force --params '/Password:root'
+              choco install mysql
+              
             build: yarn build
             target: x86_64-pc-windows-msvc
           - host: ubuntu-latest
