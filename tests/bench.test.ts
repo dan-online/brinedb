@@ -15,57 +15,73 @@ const randomData = (length: number) => {
 };
 
 describe("Benchmark", () => {
-	test("Brine", async () => {
-		const bench = new Bench({ time: 200 });
-		const brinedb = new Brine(BrineDatabases.sqlite.file("test.sqlite"), {
-			serialize: (value) => value as string,
-			deserialize: (value) => value,
-		});
+	test(
+		"Brine",
+		async () => {
+			const bench = new Bench({ time: 200 });
+			const brinedb = new Brine(BrineDatabases.sqlite.file("test.sqlite"));
 
-		await brinedb.init();
-		await brinedb.clear();
+			brinedb.init();
+			brinedb.clear();
 
-		const setInitialManyData: [string, string][] = [];
-		const size = 1_000;
+			const setInitialManyData: [string, string][] = [];
+			const size = 1_000;
 
-		await new Promise<void>((done) => {
 			for (let i = 0; i < size; i++) {
 				setInitialManyData.push([`key-${i}`, randomData(100)]);
 			}
 
-			done();
-		});
+			await brinedb.setMany(setInitialManyData);
 
-		await brinedb.setMany(setInitialManyData);
+			bench
+				.add("get", async () => {
+					await brinedb.get(`key-${Math.floor(Math.random() * size)}`);
+				})
+				.add("set", async () => {
+					await brinedb.set(
+						`key-${Math.floor(Math.random() * size) + size}`,
+						randomData(100),
+					);
+				})
+				.add("getMany", async () => {
+					await brinedb.getMany(
+						setInitialManyData.slice(0, 100).map(([key]) => key),
+					);
+				})
+				.add("keys", () => {
+					brinedb.keys();
+				})
+				.add("values", () => {
+					brinedb.values();
+				})
+				.add("count", () => {
+					brinedb.count();
+				});
 
-		bench
-			.add("get", async () => {
-				await brinedb.get(`key-${Math.floor(Math.random() * size)}`);
-			})
-			.add("set", async () => {
-				await brinedb.set(
-					`key-${Math.floor(Math.random() * size)}`,
-					randomData(100),
-				);
-			})
-			.add("getMany", async () => {
-				await brinedb.getMany(setInitialManyData.map(([key]) => key));
-			})
-			.add("keys", async () => {
-				await brinedb.keys();
-			})
-			.add("values", async () => {
-				await brinedb.values();
-			})
-			.add("count", async () => {
-				await brinedb.count();
-			});
+			await bench.warmup();
+			await bench.run();
 
-		await bench.warmup();
-		await bench.run();
+			const table = bench.table();
+			const newTable: {
+				[key: string]: string | number;
+			}[] = [];
 
-		console.table(bench.table());
+			for (const row of table) {
+				if (!row) continue;
 
-		await brinedb.close();
-	});
+				newTable.push({
+					...row,
+					"Average Time (ms)": (row["Average Time (ns)"] as number) / 1_000_000,
+					"Average Time (ns)": (row["Average Time (ns)"] as number).toFixed(2),
+				});
+			}
+
+			console.table(newTable);
+
+			brinedb.close();
+		},
+		{
+			timeout: 10000,
+		},
+	);
 });

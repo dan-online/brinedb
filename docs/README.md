@@ -1,10 +1,10 @@
 @brine-db/brine / [Exports](modules.md)
 
-![npm version](https://img.shields.io/npm/v/brinedb)
+![npm version](https://img.shields.io/npm/v/@brine-db/brine)
 
 # BrineDB
 
-[SeaORM](https://www.sea-ql.org/SeaORM/) wrapper for NodeJS, providing basic key/value storage in SQLite/Postgres/MySQL/MariaDB.
+[Diesel](https://diesel.rs/) wrapper for NodeJS, providing basic key/value storage in SQLite/Postgres/MySQL/MariaDB.
 
 ## Table of contents
 
@@ -30,31 +30,28 @@
 To install and set up the library, run:
 
 ```sh
-$ yarn add brinedb
+$ yarn add @brine-db/brine
 ```
 
 Or if you prefer npm:
 
 ```sh
-$ npm i brinedb
+$ npm i @brine-db/brine
 ```
 
 ## Quick Start
 
 ```js
-const { Brine } = require('brinedb');
+const { Brine } = require('@brine-db/brine');
 
 // SQLite
-const brinedb = new Brine('sqlite::memory:');
-const brinedb = new Brine('sqlite:/path/to/database.sqlite');
+const brinedb = new Brine('sqlite://:memory:');
+const brinedb = new Brine('sqlite://database.sqlite');
 
 // Postgres
 const brinedb = new Brine('postgres://user:pass@localhost:5432/dbname');
 
-// MariaDB
-const brinedb = new Brine('mariadb://user:pass@localhost:3306/dbname');
-
-// MySQL
+// MySQL/MariaDB
 const brinedb = new Brine('mysql://user:pass@localhost:3306/dbname');
 
 // Initialize the database (also runs migrations)
@@ -72,22 +69,24 @@ const value = await brinedb.get('key');
 This library is written in Typescript and includes type definitions. Here is an example that will be typed correctly:
 
 ```ts
-import { Brine } from 'brinedb';
+import { Brine, BrineDatabases } from '@brine-db/brine';
 
 type Value = { hello: string }
 
-const brinedb = new Brine<Value>('sqlite::memory:');
+const brinedb = new Brine<Value>(BrineDatabases.sqlite.memory);
 
 await brinedb.set('key', { hello: 'world' });
 
-const decoded = brinedb.get('key'); // Correctly typed
+const decoded = brinedb.get('key');
+
+typeof decoded.hello; // string
 ```
 
 ## Development
 
 ### Prerequisites
 
-This project requires NodeJS (version 20 or later) and yarn.
+This project requires NodeJS (version 18 or later) and yarn.
 [Node](http://nodejs.org) and [Yarn](https://yarnpkg.com/) are really easy to install.
 To make sure you have them available on your machine,
 try running the following command.
@@ -121,8 +120,8 @@ inside your local `dist/` folder and output a binary in `native/`
 
 ## Built With
 
-- [Neon](https://neon-bindings.com/)
-- [SeaORM](https://www.sea-ql.org/SeaORM/)
+- [Napi-RS](https://napi.rs/)
+- [Diesel](https://diesel.rs/)
 - VSCode
 - TypeScript
 - Rust
@@ -137,4 +136,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## License
 
-[MIT License](https://dan-online.mit-license.org/2024) © DanCodes
+[MIT License](https://dancodes.mit-license.org/2024) © DanCodes
