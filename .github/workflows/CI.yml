@@ -35,8 +35,7 @@ jobs:
             setup: |
               brew install postgresql sqlite mariadb@10.5
 
-              export MYSQLCLIENT_LIB_DIR=/usr/local/opt/mariadb@10.5/lib
-
+              echo "MYSQLCLIENT_LIB_DIR=/usr/local/opt/mariadb@10.5/lib" >> $GITHUB_ENV
             build: yarn build
           - host: windows-latest
             setup: |
@@ -50,6 +49,11 @@ jobs:
               echo "C:\tools\mysql\current\lib" >> $GITHUB_PATH
               echo "C:\tools\mysql\current\bin" >> $GITHUB_PATH
               dir "C:\tools\mysql\current\lib"
+
+              echo "C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_PATH
+              echo "SQLITE3_LIB_DIR=C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_ENV
+              
+              echo "PQ_LIB_DIR=C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_ENV
             build: yarn build
             target: x86_64-pc-windows-msvc
           - host: ubuntu-latest
