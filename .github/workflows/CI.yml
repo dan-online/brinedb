@@ -120,14 +120,14 @@ jobs:
             ${{ matrix.settings.setup }}
             cargo test --all
             ${{ matrix.settings.build }}
-      - name: Setup
-        run: ${{ matrix.settings.setup }}
-        if: ${{ !matrix.settings.docker }}
-        shell: bash
       - name: Setup (Windows Extra)
         run: ${{ matrix.settings.setup_cmd }}
         if: ${{ !matrix.settings.docker && matrix.settings.setup_cmd }}
         shell: cmd
+      - name: Setup
+        run: ${{ matrix.settings.setup }}
+        if: ${{ !matrix.settings.docker }}
+        shell: bash
       - name: Test (Rust)
         run: cargo test --all
         if: ${{ !matrix.settings.docker }}
