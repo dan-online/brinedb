@@ -53,9 +53,8 @@ jobs:
               echo "PQ_LIB_DIR=C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_ENV
             setup_cmd: |
               choco install sqlite
-              dir C:\ProgramData\chocolatey\lib\SQLite\tools
-              cd C:\ProgramData\chocolatey\lib\SQLite\tools
-              call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+              cd /D C:\ProgramData\chocolatey\lib\SQLite\tools
+              call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
               lib /machine:x64 /def:sqlite3.def /out:sqlite3.lib
             build: yarn build
             target: x86_64-pc-windows-msvc
