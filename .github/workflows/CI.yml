@@ -32,36 +32,35 @@ jobs:
         settings:
           - host: macos-latest
             target: x86_64-apple-darwin
-            build: |
+            setup: |
               brew install postgresql sqlite mariadb@10.5
 
               export MYSQLCLIENT_LIB_DIR=/usr/local/opt/mariadb@10.5/lib
 
-              yarn build
+            build: yarn build
           - host: windows-latest
-            build: |
+            setup: |
               choco install postgresql12 --force --params '/Password:root'
 
               choco install sqlite
 
               choco install mysql
 
-              # setx /M PATH "C:\tools\mysql\current\lib;C:\tools\mysql\current\bin;%PATH%"
-              # setx /M MYSQLCLIENT_LIB_DIR "C:\tools\mysql\current\lib"
-              set MYSQLCLIENT_LIB_DIR="C:\tools\mysql\current\lib"
-              set PATH="C:\tools\mysql\current\lib;C:\tools\mysql\current\bin;%PATH%"
-
-              yarn build
+              echo "MYSQLCLIENT_LIB_DIR=C:\tools\mysql\current\lib" >> $GITHUB_ENV
+              echo "C:\tools\mysql\current\lib" >> $GITHUB_PATH
+              echo "C:\tools\mysql\current\bin" >> $GITHUB_PATH
+              dir "C:\tools\mysql\current\lib"
+            build: yarn build
             target: x86_64-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            build: |
+            setup: |
               sudo apt-get update
               sudo apt-get install -y libpq-dev postgresql libmysqlclient-dev libsqlite3-dev
 
               sed -i 's/# openssl = { version = "0.10.64", features = \["vendored"\] }/openssl = { version = "0.10.64", features = \["vendored"\] }/' Cargo.toml
-              yarn build
+            build: yarn build
     name: stable - ${{ matrix.settings.target }} - node@20
     runs-on: ${{ matrix.settings.host }}
     steps:
@@ -115,7 +114,13 @@ jobs:
         with:
           image: ${{ matrix.settings.docker }}
           options: '--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build'
-          run: ${{ matrix.settings.build }}
+          run: |
+            ${{matrix.settings.setup}}
+            ${{ matrix.settings.build }}
+      - name: Setup
+        run: ${{ matrix.settings.setup }}
+        if: ${{ !matrix.settings.docker }}
+        shell: bash
       - name: Build
         run: ${{ matrix.settings.build }}
         if: ${{ !matrix.settings.docker }}
