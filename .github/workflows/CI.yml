@@ -41,8 +41,6 @@ jobs:
             setup: |
               choco install postgresql12 --force --params '/Password:root'
 
-              choco install sqlite
-
               choco install mysql
 
               echo "MYSQLCLIENT_LIB_DIR=C:\tools\mysql\current\lib" >> $GITHUB_ENV
@@ -54,7 +52,8 @@ jobs:
               
               echo "PQ_LIB_DIR=C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_ENV
             setup_cmd: |
-              cd /D "C:\ProgramData\chocolatey\lib\SQLite\tools"
+              choco install sqlite
+              cd /D C:\ProgramData\chocolatey\lib\SQLite\tools
               call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
               lib /machine:x64 /def:sqlite3.def /out:sqlite3.lib
             build: yarn build
