@@ -43,12 +43,15 @@ jobs:
 
               choco install sqlite
 
+              cd /D C:\ProgramData\chocolatey\lib\SQLite\tools
+              call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+              lib /machine:x64 /def:sqlite3.def /out:sqlite3.lib
+
               choco install mysql
 
               echo "MYSQLCLIENT_LIB_DIR=C:\tools\mysql\current\lib" >> $GITHUB_ENV
               echo "C:\tools\mysql\current\lib" >> $GITHUB_PATH
               echo "C:\tools\mysql\current\bin" >> $GITHUB_PATH
-              dir "C:\tools\mysql\current\lib"
 
               echo "C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_PATH
               echo "SQLITE3_LIB_DIR=C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_ENV
@@ -116,11 +119,15 @@ jobs:
           options: '--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build'
           run: |
             ${{ matrix.settings.setup }}
+            cargo test --all
             ${{ matrix.settings.build }}
       - name: Setup
         run: ${{ matrix.settings.setup }}
         if: ${{ !matrix.settings.docker }}
         shell: bash
+      - name: Test (Rust)
+        run: cargo test --all
+        if: ${{ !matrix.settings.docker }}
       - name: Build
         run: ${{ matrix.settings.build }}
         if: ${{ !matrix.settings.docker }}
