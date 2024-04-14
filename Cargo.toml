@@ -21,7 +21,7 @@ napi = { version = "2.16.2", default-features = false, features = [
 # https://github.com/launchbadge/sqlx/issues/3189
 # https://github.com/launchbadge/sqlx/pull/3190
 time = "=0.3.34"
-napi-derive = "2.16.1"
+napi-derive = "2.16.2"
 brinedb-entity = { path = "crates/entity" }
 brinedb-migration = { path = "crates/migration" }
 
