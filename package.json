@@ -31,7 +31,7 @@
     "@napi-rs/cli": "^2.18.1",
     "@sapphire/ts-config": "^5.0.1",
     "@vitest/coverage-v8": "^1.5.0",
-    "tinybench": "^2.6.0",
+    "tinybench": "^2.7.0",
     "tslib": "^2.6.2",
     "tsup": "^8.0.2",
     "typedoc": "^0.25.13",
