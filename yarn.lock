@@ -1059,7 +1059,7 @@ __metadata:
     "@favware/colorette-spinner": "npm:^1.0.1"
     "@types/node": "npm:^20.12.7"
     enmap: "npm:^6.0.1"
-    tinybench: "npm:^2.7.0"
+    tinybench: "npm:^2.8.0"
     tsup: "npm:^8.0.2"
   languageName: unknown
   linkType: soft
@@ -3214,13 +3214,6 @@ __metadata:
   version: 2.6.0
   resolution: "tinybench@npm:2.6.0"
   checksum: 10c0/60ea35699bf8bac9bc8cf279fa5877ab5b335b4673dcd07bf0fbbab9d7953a02c0ccded374677213eaa13aa147f54eb75d3230139ddbeec3875829ebe73db310
-  languageName: node
-  linkType: hard
-
-"tinybench@npm:^2.7.0":
-  version: 2.7.0
-  resolution: "tinybench@npm:2.7.0"
-  checksum: 10c0/1963312e9ff7b8d79a89f3d62241a7f774cb752a08fe611f4860d15fb47d20b43ae6c2876c8bdb4e18e2a70116e7c1e13db3cf4cf5759e145c78f0d50d59f976
   languageName: node
   linkType: hard
 
