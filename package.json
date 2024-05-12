@@ -27,8 +27,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "^1.7.2",
-    "@napi-rs/cli": "^2.18.2",
+    "@biomejs/biome": "^1.7.3",
+    "@napi-rs/cli": "^2.18.3",
     "@sapphire/ts-config": "^5.0.1",
     "@vitest/coverage-v8": "^1.6.0",
     "tinybench": "^2.8.0",
