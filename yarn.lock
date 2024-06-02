@@ -159,7 +159,7 @@ __metadata:
     tslib: "npm:^2.6.2"
     tsup: "npm:^8.0.2"
     typedoc: "npm:^0.25.13"
-    typedoc-plugin-markdown: "npm:^4.0.2"
+    typedoc-plugin-markdown: "npm:^4.0.3"
     typescript: "npm:^5.4.5"
     vitest: "npm:^1.6.0"
   languageName: unknown
@@ -762,12 +762,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.12.12":
-  version: 20.12.12
-  resolution: "@types/node@npm:20.12.12"
+"@types/node@npm:^20.13.0":
+  version: 20.13.0
+  resolution: "@types/node@npm:20.13.0"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/f374b763c744e8f16e4f38cf6e2c0eef31781ec9228c9e43a6f267880fea420fab0a238b59f10a7cb3444e49547c5e3785787e371fc242307310995b21988812
+  checksum: 10c0/4fb1ab41d622bbf3434da138bd0f23052e5df3bc59852ea1228cdfe185fd9d66ea71171a68a3106452c883808be7eaa7bc4cd87f534708754d49849e817aa566
   languageName: node
   linkType: hard
 
@@ -1057,7 +1057,7 @@ __metadata:
   resolution: "brine-benchmark@workspace:benchmark"
   dependencies:
     "@favware/colorette-spinner": "npm:^1.0.1"
-    "@types/node": "npm:^20.12.12"
+    "@types/node": "npm:^20.13.0"
     enmap: "npm:^6.0.2"
     tinybench: "npm:^2.8.0"
     tsup: "npm:^8.0.2"
@@ -3309,12 +3309,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "typedoc-plugin-markdown@npm:4.0.2"
+"typedoc-plugin-markdown@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "typedoc-plugin-markdown@npm:4.0.3"
   peerDependencies:
     typedoc: 0.25.x
-  checksum: 10c0/e967edb1d98b472ae468d83a0df347d03a909ebebab26cce4b2bf3a7c58ba93533d9ad5201b3b8d4f8dddd4241b26dd354aec6d746bb505045982bca83c76867
+  checksum: 10c0/5fae1a1833221e2627454b264b866f349db6fa4e62b1642015944e8db432d8c2656ae661e02ba029fb9d52309ce57fabbb7441f2933c665714add9818bd823d2
   languageName: node
   linkType: hard
 
