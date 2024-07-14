@@ -177,15 +177,15 @@ __metadata:
   resolution: "@brine-db/brine@workspace:."
   dependencies:
     "@biomejs/biome": "npm:^1.8.3"
-    "@napi-rs/cli": "npm:^2.18.3"
+    "@napi-rs/cli": "npm:^2.18.4"
     "@sapphire/ts-config": "npm:^5.0.1"
     "@vitest/coverage-v8": "npm:^2.0.2"
     tinybench: "npm:^2.8.0"
     tslib: "npm:^2.6.3"
     tsup: "npm:^8.1.0"
-    typedoc: "npm:^0.26.3"
-    typedoc-plugin-markdown: "npm:^4.1.0"
-    typescript: "npm:^5.5.2"
+    typedoc: "npm:^0.26.4"
+    typedoc-plugin-markdown: "npm:^4.2.1"
+    typescript: "npm:^5.5.3"
     vitest: "npm:^2.0.2"
   languageName: unknown
   linkType: soft
@@ -584,12 +584,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@napi-rs/cli@npm:^2.18.3":
-  version: 2.18.3
-  resolution: "@napi-rs/cli@npm:2.18.3"
+"@napi-rs/cli@npm:^2.18.4":
+  version: 2.18.4
+  resolution: "@napi-rs/cli@npm:2.18.4"
   bin:
     napi: scripts/index.js
-  checksum: 10c0/4d91fe84551a3775cbf93f6340c8b6a87dc653248f90c459fb996ea689ff52ba698a7620ad08713b3b97baf0a675fe2d4cac83a9e842e56cdfbf204c7f5f01d5
+  checksum: 10c0/cb80bc86687ba01077a0faa8d38198bc632b7caacf3a42ec42c3ec04700084ca26be9eec13bf7ac7da90e6afb46c65a39de8a86825a53b74dec2f2f459c0a7ea
   languageName: node
   linkType: hard
 
@@ -778,12 +778,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.14.9":
-  version: 20.14.9
-  resolution: "@types/node@npm:20.14.9"
+"@types/node@npm:^20.14.10":
+  version: 20.14.10
+  resolution: "@types/node@npm:20.14.10"
   dependencies:
     undici-types: "npm:~5.26.4"
-  checksum: 10c0/911ffa444dc032897f4a23ed580c67903bd38ea1c5ec99b1d00fa10b83537a3adddef8e1f29710cbdd8e556a61407ed008e06537d834e48caf449ce59f87d387
+  checksum: 10c0/0b06cff14365c2d0085dc16cc8cbea5c40ec09cfc1fea966be9eeecf35562760bfde8f88e86de6edfaf394501236e229d9c1084fad04fb4dec472ae245d8ae69
   languageName: node
   linkType: hard
 
@@ -1049,7 +1049,7 @@ __metadata:
   resolution: "brine-benchmark@workspace:benchmark"
   dependencies:
     "@favware/colorette-spinner": "npm:^1.0.1"
-    "@types/node": "npm:^20.14.9"
+    "@types/node": "npm:^20.14.10"
     enmap: "npm:^6.0.2"
     tinybench: "npm:^2.8.0"
     tsup: "npm:^8.1.0"
@@ -3275,18 +3275,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "typedoc-plugin-markdown@npm:4.1.0"
+"typedoc-plugin-markdown@npm:^4.2.1":
+  version: 4.2.1
+  resolution: "typedoc-plugin-markdown@npm:4.2.1"
   peerDependencies:
     typedoc: 0.26.x
-  checksum: 10c0/2282d27fc638f9cb8dbe4c43d1dae7a69fb4a7330fe073d405bf0a064ce293a7d13cfd98d0ed41963a56b7f7133747770bd734160c4dc4bccdadf42bbe4c7680
+  checksum: 10c0/b56e6c8853e866a215a6dab81a7ed471777f00822f8e9de35935aa67b55a6459a5ab05391e7407a1aa4a76c5ada0eb8e1362589eda6c6eb203dbc3e4166d1e55
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.26.3":
-  version: 0.26.3
-  resolution: "typedoc@npm:0.26.3"
+"typedoc@npm:^0.26.4":
+  version: 0.26.4
+  resolution: "typedoc@npm:0.26.4"
   dependencies:
     lunr: "npm:^2.3.9"
     markdown-it: "npm:^14.1.0"
@@ -3297,7 +3297,7 @@ __metadata:
     typescript: 4.6.x || 4.7.x || 4.8.x || 4.9.x || 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10c0/d6d0a19d4b90cb547dcefb282c35ea4bef0b76dcb3d0c7afdae2bb9b0af092a7389b40fb02aae8fba7bf8ee7da371ab200690d9c9d4a38b156275a3674c3f2ce
+  checksum: 10c0/41da973bc42bcce86b0fdbff69673f5d51f3a753109aed670807f600d26ab5b557ebbc965d6a2d13c1813b79008be4e310bf8c4c28c59e01eb0ebff56f29f633
   languageName: node
   linkType: hard
 
@@ -3311,13 +3311,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.5.2":
-  version: 5.5.2
-  resolution: "typescript@npm:5.5.2"
+"typescript@npm:^5.5.3":
+  version: 5.5.3
+  resolution: "typescript@npm:5.5.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/8ca39b27b5f9bd7f32db795045933ab5247897660627251e8254180b792a395bf061ea7231947d5d7ffa5cb4cc771970fd4ef543275f9b559f08c9325cccfce3
+  checksum: 10c0/f52c71ccbc7080b034b9d3b72051d563601a4815bf3e39ded188e6ce60813f75dbedf11ad15dd4d32a12996a9ed8c7155b46c93a9b9c9bad1049766fe614bbdd
   languageName: node
   linkType: hard
 
@@ -3331,13 +3331,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.5.2#optional!builtin<compat/typescript>":
-  version: 5.5.2
-  resolution: "typescript@patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"
+"typescript@patch:typescript@npm%3A^5.5.3#optional!builtin<compat/typescript>":
+  version: 5.5.3
+  resolution: "typescript@patch:typescript@npm%3A5.5.3#optional!builtin<compat/typescript>::version=5.5.3&hash=379a07"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 10c0/a7b7ede75dc7fc32a76d0d0af6b91f5fbd8620890d84c906f663d8783bf3de6d7bd50f0430b8bb55eac88a38934af847ff709e7156e5138b95ae94cbd5f73e5b
+  checksum: 10c0/911c7811d61f57f07df79c4a35f56a0f426a65426a020e5fcd792f66559f399017205f5f10255329ab5a3d8c2d1f1d19530aeceffda70758a521fae1d469432e
   languageName: node
   linkType: hard
 

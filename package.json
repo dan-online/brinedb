@@ -28,15 +28,15 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@napi-rs/cli": "^2.18.3",
+    "@napi-rs/cli": "^2.18.4",
     "@sapphire/ts-config": "^5.0.1",
     "@vitest/coverage-v8": "^2.0.2",
     "tinybench": "^2.8.0",
     "tslib": "^2.6.3",
     "tsup": "^8.1.0",
-    "typedoc": "^0.26.3",
-    "typedoc-plugin-markdown": "^4.1.0",
-    "typescript": "^5.5.2",
+    "typedoc": "^0.26.4",
+    "typedoc-plugin-markdown": "^4.2.1",
+    "typescript": "^5.5.3",
     "vitest": "^2.0.2"
   },
   "packageManager": "yarn@4.3.1"
