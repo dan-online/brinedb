@@ -1178,7 +1178,7 @@ __metadata:
     "@favware/colorette-spinner": "npm:^1.0.1"
     "@types/node": "npm:^20.14.14"
     enmap: "npm:^6.0.2"
-    tinybench: "npm:^2.8.0"
+    tinybench: "npm:^2.9.0"
     tsup: "npm:^8.2.4"
   languageName: unknown
   linkType: soft
