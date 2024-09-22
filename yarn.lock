@@ -1240,7 +1240,7 @@ __metadata:
   dependencies:
     "@favware/colorette-spinner": "npm:^1.0.1"
     "@types/node": "npm:^20.16.5"
-    enmap: "npm:^6.0.2"
+    enmap: "npm:^6.0.3"
     tinybench: "npm:^2.9.0"
     tsup: "npm:^8.3.0"
   languageName: unknown
@@ -1551,15 +1551,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enmap@npm:^6.0.2":
-  version: 6.0.2
-  resolution: "enmap@npm:6.0.2"
+"enmap@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "enmap@npm:6.0.3"
   dependencies:
     better-serialize: "npm:^1.0.0"
     better-sqlite3: "npm:^9.4.3"
     lodash-es: "npm:^4.17.21"
     on-change: "npm:^5.0.1"
-  checksum: 10c0/524eb620a28d78a67c7203c75725949273b44dae2d7cd316c797de52b69d73eb300eb13aa1ab714d3d51a220f9e6cc67acfbf0ce462cce1d3604f9e47756e01a
+  checksum: 10c0/e71c786a3f5cbe4f6ef6a604e39764dbf76d3c9aee7117b07072d7646165443b7cabf3c36aa5749ebe750060780cac826db7ad14d344cc9a2ee954d312bc6a75
   languageName: node
   linkType: hard
 
