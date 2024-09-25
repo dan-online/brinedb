@@ -6,3 +6,6 @@ edition = "2021"
 [dependencies]
 diesel = { version = "2.1.5", features = ["postgres", "sqlite", "mysql"] }
 diesel_migrations = "2.1.0"
+pq-sys = { version = "0.6.3", features = ["bundled"]}
+libsqlite3-sys = { version = "0.30.1", features = ["bundled"]}
+mysqlclient-sys = { version = "0.4.1", features = ["bundled"]}

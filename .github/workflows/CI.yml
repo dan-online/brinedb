@@ -32,43 +32,13 @@ jobs:
         settings:
           - host: macos-latest
             target: x86_64-apple-darwin
-            setup: |
-              brew install postgresql sqlite mariadb@10.5
-
-              echo "MYSQLCLIENT_LIB_DIR=/usr/local/opt/mariadb@10.5/lib" >> $GITHUB_ENV
             build: yarn build
           - host: windows-latest
-            setup: |
-              echo "MYSQLCLIENT_LIB_DIR=C:\mysql\lib" >> $GITHUB_ENV
-              # echo "C:\tools\mysql\current\lib" >> $GITHUB_PATH
-              echo "C:\mysql\bin" >> $GITHUB_PATH
-
-              echo "C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_PATH
-              echo "SQLITE3_LIB_DIR=C:\ProgramData\chocolatey\lib\SQLite\tools" >> $GITHUB_ENV
-              
-              echo "PQ_LIB_DIR=C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_ENV
-              echo "C:\Program Files\PostgreSQL\12\bin" >> $GITHUB_PATH
-              echo "C:\Program Files\PostgreSQL\12\lib" >> $GITHUB_PATH
-            setup_cmd: |
-              choco install sqlite
-
-              cd /D C:\ProgramData\chocolatey\lib\SQLite\tools
-              call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
-              lib /machine:x64 /def:sqlite3.def /out:sqlite3.lib
-
-              choco install postgresql12 --force --params '/Password:root'
-              # choco install mysql
-              
             build: yarn build
             target: x86_64-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            setup: |
-              sudo apt-get update
-              sudo apt-get install -y libpq-dev postgresql libmysqlclient-dev libsqlite3-dev
-
-              sed -i 's/# openssl = { version = "0.10.64", features = \["vendored"\] }/openssl = { version = "0.10.64", features = \["vendored"\] }/' Cargo.toml
             build: yarn build
     name: stable - ${{ matrix.settings.target }} - node@20
     runs-on: ${{ matrix.settings.host }}
@@ -120,17 +90,8 @@ jobs:
           image: ${{ matrix.settings.docker }}
           options: '--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build'
           run: |
-            ${{ matrix.settings.setup }}
             cargo test --all
             ${{ matrix.settings.build }}
-      - name: Setup (Windows Extra)
-        run: ${{ matrix.settings.setup_cmd }}
-        if: ${{ !matrix.settings.docker && matrix.settings.setup_cmd }}
-        shell: cmd
-      - name: Setup
-        run: ${{ matrix.settings.setup }}
-        if: ${{ !matrix.settings.docker }}
-        shell: bash
       - name: Test (Rust)
         run: cargo test --all
         if: ${{ !matrix.settings.docker }}
