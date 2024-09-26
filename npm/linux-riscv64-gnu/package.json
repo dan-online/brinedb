@@ -1,0 +1,21 @@
+{
+  "name": "@brine-db/brine-linux-riscv64-gnu",
+  "version": "2.0.1",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "riscv64"
+  ],
+  "main": "brine.linux-riscv64-gnu.node",
+  "files": [
+    "brine.linux-riscv64-gnu.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "libc": [
+    "glibc"
+  ]
+}
