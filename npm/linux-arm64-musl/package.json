@@ -1,0 +1,21 @@
+{
+  "name": "@brine-db/brine-linux-arm64-musl",
+  "version": "2.0.1",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "main": "brine.linux-arm64-musl.node",
+  "files": [
+    "brine.linux-arm64-musl.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "libc": [
+    "musl"
+  ]
+}

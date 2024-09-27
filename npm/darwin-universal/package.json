@@ -1,0 +1,15 @@
+{
+  "name": "@brine-db/brine-darwin-universal",
+  "version": "2.0.1",
+  "os": [
+    "darwin"
+  ],
+  "main": "brine.darwin-universal.node",
+  "files": [
+    "brine.darwin-universal.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}

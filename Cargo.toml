@@ -4,7 +4,7 @@ name = "brine-db"
 version = "0.0.0"
 
 [workspace]
-members = ["crates/entity", "crates/migration"]
+members = ["crates/orm"]
 
 [lib]
 crate-type = ["cdylib"]
@@ -17,13 +17,11 @@ napi = { version = "2.16.4", default-features = false, features = [
     "tokio_rt",
 ] }
 # https://github.com/sfackler/rust-openssl/issues/763#issuecomment-1150213102
-# openssl = { version = "0.10.64", features = ["vendored"] }
 # https://github.com/launchbadge/sqlx/issues/3189
 # https://github.com/launchbadge/sqlx/pull/3190
-time = "=0.3.36"
-napi-derive = "2.16.3"
-brinedb-entity = { path = "crates/entity" }
-brinedb-migration = { path = "crates/migration" }
+# time = "=0.3.34"
+napi-derive = "2.16.1"
+brinedb-orm = { path = "crates/orm" }
 
 [build-dependencies]
 napi-build = "2.1.3"

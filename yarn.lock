@@ -172,11 +172,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@brine-db/brine-darwin-x64@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@brine-db/brine-darwin-x64@npm:2.0.1"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@brine-db/brine-linux-x64-gnu@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@brine-db/brine-linux-x64-gnu@npm:2.0.1"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
+"@brine-db/brine-win32-x64-msvc@npm:2.0.1":
+  version: 2.0.1
+  resolution: "@brine-db/brine-win32-x64-msvc@npm:2.0.1"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@brine-db/brine@workspace:.":
   version: 0.0.0-use.local
   resolution: "@brine-db/brine@workspace:."
   dependencies:
     "@biomejs/biome": "npm:^1.9.2"
+    "@brine-db/brine-darwin-x64": "npm:2.0.1"
+    "@brine-db/brine-linux-x64-gnu": "npm:2.0.1"
+    "@brine-db/brine-win32-x64-msvc": "npm:2.0.1"
     "@napi-rs/cli": "npm:^2.18.4"
     "@sapphire/ts-config": "npm:^5.0.1"
     "@vitest/coverage-v8": "npm:^2.1.1"
@@ -187,6 +211,13 @@ __metadata:
     typedoc-plugin-markdown: "npm:^4.2.7"
     typescript: "npm:^5.6.2"
     vitest: "npm:^2.1.1"
+  dependenciesMeta:
+    "@brine-db/brine-darwin-x64":
+      optional: true
+    "@brine-db/brine-linux-x64-gnu":
+      optional: true
+    "@brine-db/brine-win32-x64-msvc":
+      optional: true
   languageName: unknown
   linkType: soft
 

@@ -1,0 +1,21 @@
+{
+  "name": "@brine-db/brine-linux-x64-musl",
+  "version": "2.0.1",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "brine.linux-x64-musl.node",
+  "files": [
+    "brine.linux-x64-musl.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "libc": [
+    "musl"
+  ]
+}

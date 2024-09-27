@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
-  "description": "SeaORM wrapper for NodeJS, providing basic key/value storage in sqlite/postgres/mysql",
+  "description": "Diesel wrapper for NodeJS, providing basic key/value storage in sqlite/postgres/mysql",
   "scripts": {
     "artifacts": "napi artifacts",
     "build": "yarn build:rs && yarn build:ts",
@@ -19,8 +19,22 @@
     "docs": "typedoc --plugin typedoc-plugin-markdown --out docs --excludeExternals --exclude benchmark/ --externalPattern '**/node_modules/**' src/index.ts"
   },
   "napi": {
-    "name": "brine",
-    "triples": {}
+    "napi": {
+      "name": "brine",
+      "triples": {
+        "additional": [
+          "aarch64-apple-darwin",
+          "aarch64-linux-android",
+          "aarch64-unknown-linux-gnu",
+          "aarch64-unknown-linux-musl",
+          "aarch64-pc-windows-msvc",
+          "armv7-unknown-linux-gnueabihf",
+          "x86_64-unknown-linux-musl",
+          "i686-pc-windows-msvc",
+          "armv7-linux-androideabi"
+        ]
+      }
+    }
   },
   "workspaces": [
     "benchmark"
@@ -39,5 +53,10 @@
     "typescript": "^5.6.2",
     "vitest": "^2.1.1"
   },
-  "packageManager": "yarn@4.5.0"
+  "packageManager": "yarn@4.5.0",
+  "optionalDependencies": {
+    "@brine-db/brine-darwin-x64": "2.0.1",
+    "@brine-db/brine-linux-x64-gnu": "2.0.1",
+    "@brine-db/brine-win32-x64-msvc": "2.0.1"
+  }
 }
