@@ -34,9 +34,9 @@
     "tinybench": "^2.9.0",
     "tslib": "^2.7.0",
     "tsup": "^8.3.0",
-    "typedoc": "^0.26.8",
+    "typedoc": "^0.26.9",
     "typedoc-plugin-markdown": "^4.2.9",
-    "typescript": "^5.6.2",
+    "typescript": "^5.6.3",
     "vitest": "^2.1.2"
   },
   "packageManager": "yarn@4.5.0"
