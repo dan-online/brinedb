@@ -3,10 +3,14 @@ name = "brinedb-orm"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+bundled = ["pq-sys/bundled", "libsqlite3-sys/bundled", "mysqlclient-sys/bundled"]
+default = ["bundled", "openssl/vendored"]
+
 [dependencies]
 diesel = { version = "2.2.4", features = ["postgres", "sqlite", "mysql"] }
 diesel_migrations = "2.2.0"
-pq-sys = { version = "0.6.3", features = ["bundled"]}
-libsqlite3-sys = { version = "0.30.1", features = ["bundled"]}
-mysqlclient-sys = { version = "0.4.1", features = ["bundled"]}
-openssl = { version = "0.10.66", features = ["vendored"] }
+pq-sys = { version = "0.6.3"}
+libsqlite3-sys = { version = "0.30.1"}
+mysqlclient-sys = { version = "0.4.1"}
+openssl = { version = "0.10.66" }

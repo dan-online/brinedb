@@ -198,3 +198,4 @@ Cargo.lock
 
 *.sqlite*
 .envrc
+.direnv
