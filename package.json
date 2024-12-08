@@ -30,14 +30,14 @@
     "@biomejs/biome": "^1.9.4",
     "@napi-rs/cli": "^2.18.4",
     "@sapphire/ts-config": "^5.0.1",
-    "@vitest/coverage-v8": "^2.1.6",
+    "@vitest/coverage-v8": "^2.1.8",
     "tinybench": "^2.9.0",
     "tslib": "^2.8.1",
     "tsup": "^8.3.5",
-    "typedoc": "^0.27.2",
-    "typedoc-plugin-markdown": "^4.3.0",
+    "typedoc": "^0.27.3",
+    "typedoc-plugin-markdown": "^4.3.1",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.6"
+    "vitest": "^2.1.8"
   },
   "packageManager": "yarn@4.5.3"
 }
