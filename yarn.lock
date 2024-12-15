@@ -156,7 +156,7 @@ __metadata:
     "@napi-rs/cli": "npm:^2.18.4"
     "@sapphire/ts-config": "npm:^5.0.1"
     "@vitest/coverage-v8": "npm:^2.1.8"
-    tinybench: "npm:^2.9.0"
+    tinybench: "npm:^3.0.7"
     tslib: "npm:^2.8.1"
     tsup: "npm:^8.3.5"
     typedoc: "npm:^0.27.5"
@@ -1196,7 +1196,7 @@ __metadata:
     "@favware/colorette-spinner": "npm:^1.0.1"
     "@types/node": "npm:^22.10.2"
     enmap: "npm:^6.0.3"
-    tinybench: "npm:^2.9.0"
+    tinybench: "npm:^3.0.7"
     tsup: "npm:^8.3.5"
   languageName: unknown
   linkType: soft
@@ -3069,6 +3069,13 @@ __metadata:
   version: 2.9.0
   resolution: "tinybench@npm:2.9.0"
   checksum: 10c0/c3500b0f60d2eb8db65250afe750b66d51623057ee88720b7f064894a6cb7eb93360ca824a60a31ab16dab30c7b1f06efe0795b352e37914a9d4bad86386a20c
+  languageName: node
+  linkType: hard
+
+"tinybench@npm:^3.0.7":
+  version: 3.0.7
+  resolution: "tinybench@npm:3.0.7"
+  checksum: 10c0/47ffabd24fbbf6741e8c042529bb4f034f64d51ec671b12e332db0c2e64c3ebf4d09c2ccc4be338ecb7ddf716767116b668d0bed8a8378e87359a3419d417b2a
   languageName: node
   linkType: hard
 
