@@ -159,8 +159,8 @@ __metadata:
     tinybench: "npm:^2.9.0"
     tslib: "npm:^2.8.1"
     tsup: "npm:^8.3.5"
-    typedoc: "npm:^0.27.3"
-    typedoc-plugin-markdown: "npm:^4.3.1"
+    typedoc: "npm:^0.27.5"
+    typedoc-plugin-markdown: "npm:^4.3.2"
     typescript: "npm:^5.7.2"
     vitest: "npm:^2.1.8"
   languageName: unknown
@@ -928,12 +928,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.10.1":
-  version: 22.10.1
-  resolution: "@types/node@npm:22.10.1"
+"@types/node@npm:^22.10.2":
+  version: 22.10.2
+  resolution: "@types/node@npm:22.10.2"
   dependencies:
     undici-types: "npm:~6.20.0"
-  checksum: 10c0/0fbb6d29fa35d807f0223a4db709c598ac08d66820240a2cd6a8a69b8f0bc921d65b339d850a666b43b4e779f967e6ed6cf6f0fca3575e08241e6b900364c234
+  checksum: 10c0/2c7b71a040f1ef5320938eca8ebc946e6905caa9bbf3d5665d9b3774a8d15ea9fab1582b849a6d28c7fc80756a62c5666bc66b69f42f4d5dafd1ccb193cdb4ac
   languageName: node
   linkType: hard
 
@@ -1194,7 +1194,7 @@ __metadata:
   resolution: "brine-benchmark@workspace:benchmark"
   dependencies:
     "@favware/colorette-spinner": "npm:^1.0.1"
-    "@types/node": "npm:^22.10.1"
+    "@types/node": "npm:^22.10.2"
     enmap: "npm:^6.0.3"
     tinybench: "npm:^2.9.0"
     tsup: "npm:^8.3.5"
@@ -3199,18 +3199,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typedoc-plugin-markdown@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "typedoc-plugin-markdown@npm:4.3.1"
+"typedoc-plugin-markdown@npm:^4.3.2":
+  version: 4.3.2
+  resolution: "typedoc-plugin-markdown@npm:4.3.2"
   peerDependencies:
     typedoc: 0.27.x
-  checksum: 10c0/031e7d61611899fc4f45953575b7b63734c34379c1f9791b42e0ab4605dd2fff952dd35d53d8edd8068afdc9b127858a6b93fda94ec065e8a6ab869012e84500
+  checksum: 10c0/6e66524fabb8087931552477188e47084ce6ce32e8e937c86795bbf821dfad042a9d03d83ecbfbde6b4f94b78c8370f9f8ed1eeec169dca04759ad2f82057e45
   languageName: node
   linkType: hard
 
-"typedoc@npm:^0.27.3":
-  version: 0.27.3
-  resolution: "typedoc@npm:0.27.3"
+"typedoc@npm:^0.27.5":
+  version: 0.27.5
+  resolution: "typedoc@npm:0.27.5"
   dependencies:
     "@gerrit0/mini-shiki": "npm:^1.24.0"
     lunr: "npm:^2.3.9"
@@ -3221,7 +3221,7 @@ __metadata:
     typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x
   bin:
     typedoc: bin/typedoc
-  checksum: 10c0/e772715d6b6fed48d682187abc48b9c7bf72fe11dd8afba536b3307e94f07cd77719ef4f2f137964a530561c0982ea8a14118a48b059185142510f6b4fd790c2
+  checksum: 10c0/c73501a601ba96c502bc1cdca8539a12512a1938791656f9620cff962fff6e0c4b475527b031c785a32496da2bee24c3ea35524a16707df5c5e1f458ab814deb
   languageName: node
   linkType: hard
 
