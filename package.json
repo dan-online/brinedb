@@ -34,8 +34,8 @@
     "tinybench": "^2.9.0",
     "tslib": "^2.8.1",
     "tsup": "^8.4.0",
-    "typedoc": "^0.27.9",
-    "typedoc-plugin-markdown": "^4.4.2",
+    "typedoc": "^0.28.0",
+    "typedoc-plugin-markdown": "^4.5.0",
     "typescript": "^5.8.2",
     "vitest": "^3.0.8"
   },
