@@ -11,7 +11,7 @@
         "tinybench": "^2.9.0"
     },
     "devDependencies": {
-        "@types/node": "^22.15.18",
+        "@types/node": "^22.15.21",
         "tsup": "^8.5.0"
     }
 }
