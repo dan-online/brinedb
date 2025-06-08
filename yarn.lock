@@ -1220,14 +1220,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"better-sqlite3@npm:^9.4.3":
-  version: 9.5.0
-  resolution: "better-sqlite3@npm:9.5.0"
+"better-sqlite3@npm:^11.10.0":
+  version: 11.10.0
+  resolution: "better-sqlite3@npm:11.10.0"
   dependencies:
     bindings: "npm:^1.5.0"
     node-gyp: "npm:latest"
     prebuild-install: "npm:^7.1.1"
-  checksum: 10c0/285f9a7e4b54b3bc9a8a034e4b19a73dab364637581429fd55765612429bf37790606cf53e01b0dd1feac0c5b02a30098916a595e11083a42dd503f739412c25
+  checksum: 10c0/1fffbf9e5fc9d24847a3ecf09491bceab1c294b46ba41df1c449dc20b6f5c5d9d94ff24becd0b1632ee282bd21278b7fea53a5a6215bb99209ded0ae05eda3b0
   languageName: node
   linkType: hard
 
@@ -1266,7 +1266,7 @@ __metadata:
   dependencies:
     "@favware/colorette-spinner": "npm:^1.0.1"
     "@types/node": "npm:^22.15.29"
-    enmap: "npm:^6.0.4"
+    enmap: "npm:^6.0.5"
     tinybench: "npm:^2.9.0"
     tsup: "npm:^8.5.0"
   languageName: unknown
@@ -1518,15 +1518,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enmap@npm:^6.0.4":
-  version: 6.0.4
-  resolution: "enmap@npm:6.0.4"
+"enmap@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "enmap@npm:6.0.5"
   dependencies:
     better-serialize: "npm:^1.0.0"
-    better-sqlite3: "npm:^9.4.3"
+    better-sqlite3: "npm:^11.10.0"
     lodash-es: "npm:^4.17.21"
     on-change: "npm:^5.0.1"
-  checksum: 10c0/d11ff3eda11f534c7f580311f8e26ce4c890774576afbeee766b3b37b02974cd9923a8a7c5d33a8152a74d98cb394f791324d4af9a2e076cf9fbc6b7b946d790
+  checksum: 10c0/db16ffb22105d7783e56f58953d58892d760baa43cc45217eb50ba97ddcc09c2e148f49e5632158ebd63f43750849720c9d1b1911f1093a029b0aa3d11771a30
   languageName: node
   linkType: hard
 
