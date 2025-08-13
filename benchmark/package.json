@@ -8,7 +8,7 @@
     "dependencies": {
         "@favware/colorette-spinner": "^1.0.1",
         "enmap": "^6.0.5",
-        "tinybench": "^2.9.0"
+        "tinybench": "^4.1.0"
     },
     "devDependencies": {
         "@types/node": "^22.15.29",
